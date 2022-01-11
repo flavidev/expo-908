@@ -1,10 +1,9 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import './App.css';
 
 function App() {
   return (
-    <div className='container'>
+    <div className='container' style={styles.container}>
       <Authenticator loginMechanisms={['email']}>
         {({ signOut, user }) => (
           <div>
@@ -17,6 +16,15 @@ function App() {
   );
 }
 
-
+const styles = {
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    width: '100vw',
+    backgroundColor: '#225464',
+  },
+}
 
 export default App;
