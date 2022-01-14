@@ -19,28 +19,28 @@ I18n.putVocabularies(dictionaire)
 function App() {
 
   return (
-    <>
+
+    <div className='container'>
       <AmplifyProvider>
-        <div className='container'>
-          <div className='heading-container'>
-            <Heading level={2} className='heading-text'>
-              EAE
-            </Heading>
-          </div>
-          <div className='authenticator-container'>
-            <Authenticator
-              className='authenticator-component'
-              signUpAttributes={['given_name', 'name', 'phone_number']}
-              loginMechanisms={['email']}
-            >
-              {({ signOut, user }) => (
-                <Main user={user} signOut={signOut} />
-              )}
-            </Authenticator>
-          </div>
+        <div className='heading-container'>
+          <Heading level={2} className='heading-text'>
+            EAE
+          </Heading>
+        </div>
+        <div className='authenticator-container'>
+          <Authenticator
+            className='authenticator-component'
+            signUpAttributes={['given_name', 'name', 'phone_number']}
+            loginMechanisms={['email']}
+          >
+            {({ signOut, user }) => (
+              <Main user={user} signOut={signOut} />
+            )}
+          </Authenticator>
         </div>
       </AmplifyProvider>
-    </>
+    </div>
+
   );
 }
 
