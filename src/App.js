@@ -5,8 +5,9 @@ import { AmplifyProvider, Authenticator, Heading } from '@aws-amplify/ui-react';
 //import { dictionaire } from './utils/Translations'
 
 import Main from './pages/Main'
-import './App.css';
+
 import '@aws-amplify/ui-react/styles.css';
+import './App.css';
 
 //I18n.putVocabularies(translations);
 //I18n.setLanguage('pt-BR');
@@ -16,7 +17,7 @@ import '@aws-amplify/ui-react/styles.css';
 function App() {
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className='homepage-bgimage'>
       <AmplifyProvider>
         <div style={styles.headingContainer}>
           <Heading level={2} style={styles.headingText}>
@@ -47,7 +48,6 @@ const styles = {
     justifyContent: 'center',
     height: '100vh',
     width: '100vw',
-    backgroundColor: '#8055a4',
   },
   headingContainer: {
     display: 'flex',

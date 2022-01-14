@@ -14,3 +14,11 @@
   transition-property: none;
   border-color: #000;
 }
+
+.homepage-bgimage {
+  background: url('./assets/images/background.png');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
