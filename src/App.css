@@ -1,0 +1,16 @@
+.amplify-button[data-variation='link'] {
+  color: #8055a4;
+}
+
+.amplify-button[data-variation='primary'] {
+  background-color: #8055a4;
+  border-color: 'grey';
+  color: #fff;
+}
+
+.amplify-tabs-item[data-state='active'] {
+  color: #8055a4;
+  background-color: 'grey';
+  transition-property: none;
+  border-color: #000;
+}
