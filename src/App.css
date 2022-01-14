@@ -1,3 +1,28 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  background: url('./assets/images/background.png');
+  background-position: center;
+  background-size: cover;
+}
+
+.heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading-text {
+  font-family: 'Azonix';
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #000;
+}
+
 .amplify-button[data-variation='link'] {
   color: #8055a4;
 }
@@ -15,10 +40,29 @@
   border-color: #000;
 }
 
-.homepage-bgimage {
-  background: url('./assets/images/background.png');
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bouncing-logo {
+  max-width: 200px;
+  max-height: 200px;
+
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0) translateX(100px) rotate(10deg) scale(1);
+  }
+  50% {
+    transform: translateY(-50px) translateX(0) rotate(0deg) scale(1.2);
+  }
+  100% {
+    transform: translateY(0px) translateX(-100px) rotate(-10deg) scale(1);
+  }
 }

@@ -5,8 +5,7 @@ import { Logo } from '../components/Logo'
 
 function Main(props) {
     return (
-        <div style={styles.container}>
-            <h1>{props.user.attributes.given_name}</h1>
+        <div className='main-container'>
             <Logo />
             <Card
                 variation='outlined'
@@ -15,15 +14,5 @@ function Main(props) {
     )
 }
 
-const styles = {
-    container: {
-        display: 'flex',
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-    },
-
-}
 
 export default Main

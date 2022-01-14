@@ -17,14 +17,14 @@ import './App.css';
 function App() {
 
   return (
-    <div style={styles.container} className='homepage-bgimage'>
+    <div className='container'>
       <AmplifyProvider>
-        <div style={styles.headingContainer}>
-          <Heading level={2} style={styles.headingText}>
+        <div className='heading-container'>
+          <Heading level={2} className='heading-text'>
             EAE
           </Heading>
         </div>
-        <div style={{ display: 'flex', flex: 1 }}>
+        <div>
           <Authenticator
             signUpAttributes={['given_name', 'name', 'phone_number']}
             loginMechanisms={['email']}
@@ -40,25 +40,4 @@ function App() {
   );
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirction: 'column',
-    justifyContent: 'center',
-    height: '100vh',
-    width: '100vw',
-  },
-  headingContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  headingText: {
-    fontFamily: 'Azonix',
-    color: '#fff',
-  }
-}
-
 export default App;
-
