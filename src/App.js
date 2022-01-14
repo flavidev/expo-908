@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { I18n } from 'aws-amplify';
 import { AmplifyProvider, Authenticator, Heading } from '@aws-amplify/ui-react';
@@ -17,8 +17,6 @@ I18n.putVocabularies(dictionaire)
 
 
 function App() {
-
-  const [page, setPage] = useState('main')
 
   return (
     <AmplifyProvider>
