@@ -1,30 +1,48 @@
-import { Authenticator } from '@aws-amplify/ui-react';
+import React, { useState } from 'react';
+
+import { I18n } from 'aws-amplify';
+import { AmplifyProvider, Authenticator, Heading } from '@aws-amplify/ui-react';
+
+import { translations } from '@aws-amplify/ui';
+import { dictionaire } from './utils/Translations'
+
+import Main from './pages/Main'
+
 import '@aws-amplify/ui-react/styles.css';
+import './App.css'
+
+I18n.putVocabularies(translations);
+I18n.setLanguage('pt-BR');
+I18n.putVocabularies(dictionaire)
+
 
 function App() {
+
+  const [page, setPage] = useState('main')
+
   return (
-    <div className='container' style={styles.container}>
-      <Authenticator loginMechanisms={['email']}>
-        {({ signOut, user }) => (
-          <div>
-            <h1>Expo Village Residence 3A Apt 908</h1>
-            <button onClick={signOut}>Sign out</button>
-          </div>
-        )}
-      </Authenticator>
-    </div>
+    <AmplifyProvider>
+      <div className='container'>
+        <div className='heading-container'>
+          <Heading level={2} className='heading-text'>
+            EAE
+          </Heading>
+        </div>
+        <div className='authenticator-container'>
+          <Authenticator
+            className='authenticator-component'
+            signUpAttributes={['given_name', 'name', 'phone_number']}
+            loginMechanisms={['email']}
+          >
+            {({ signOut, user }) => (
+              <Main user={user} signOut={signOut} />
+            )}
+          </Authenticator>
+        </div>
+      </div>
+    </AmplifyProvider>
   );
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    width: '100vw',
-    backgroundColor: '#225464',
-  },
-}
 
 export default App;
