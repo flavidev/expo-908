@@ -6,7 +6,7 @@ import { Logo } from '../components/Logo'
 function Main(props) {
     return (
         <div style={styles.container}>
-            <h1 className='welcome-text'>{props.user.attributes.given_name}</h1>
+            <h1>{props.user.attributes.given_name}</h1>
             <Logo />
             <Card
                 variation='outlined'
