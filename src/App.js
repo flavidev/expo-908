@@ -1,16 +1,17 @@
 import { AmplifyProvider, Authenticator, } from '@aws-amplify/ui-react';
 import { I18n } from 'aws-amplify';
-import { AuthComponents } from './utils/AuthComponents';
+import AmplifyI18n from "amplify-i18n"
 
+import { AuthComponents } from './utils/AuthComponents';
 
 import '@aws-amplify/ui-react/styles.css';
 import './App.css'
 
 import Main from './pages/Main'
 
-import { translations } from '@aws-amplify/ui';
-I18n.putVocabularies(translations);
-I18n.setLanguage('pt-BR');
+const locales = ["pt-BR"]
+AmplifyI18n.configure(locales)
+I18n.setLanguage("pt-BR")
 
 function App() {
 
