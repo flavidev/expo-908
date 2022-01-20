@@ -1,42 +1,27 @@
-//import { I18n } from 'aws-amplify';
-import { AmplifyProvider, Authenticator, Heading } from '@aws-amplify/ui-react';
-
-//import { translations } from '@aws-amplify/ui';
-//import { dictionaire } from './utils/Translations'
-
-import Main from './pages/Main'
+import { AmplifyProvider, Authenticator, } from '@aws-amplify/ui-react';
+import { AuthComponents } from './utils/AuthComponents';
 
 import '@aws-amplify/ui-react/styles.css';
-import './App.css';
+import './App.css'
 
-//I18n.putVocabularies(translations);
-//I18n.setLanguage('pt-BR');
-//I18n.putVocabularies(dictionaire)
-
+import Main from './pages/Main'
 
 function App() {
 
   return (
-    <div className='container'>
-      <AmplifyProvider>
-        <div className='heading-container'>
-          <Heading level={2} className='heading-text'>
-            EAE
-          </Heading>
-        </div>
-        <div>
-          <Authenticator
-            signUpAttributes={['given_name', 'name', 'phone_number']}
-            loginMechanisms={['email']}
-          >
-            {({ signOut, user }) => (
-              <Main user={user} signOut={signOut} />
-            )}
-          </Authenticator>
-        </div>
+    <div className='app-container'>
+      <AmplifyProvider >
+        <Authenticator
+          components={AuthComponents}
+          signUpAttributes={['name', 'family_name', 'phone_number']}
+          loginMechanisms={['username']}
+        >
+          {({ signOut, user }) => (
+            <Main user={user} signOut={signOut} />
+          )}
+        </Authenticator>
       </AmplifyProvider>
     </div>
-
   );
 }
 
