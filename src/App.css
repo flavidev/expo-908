@@ -39,6 +39,11 @@
   font-size: 1rem;
   color: #fff;
 }
+.small-text-black {
+  text-align: center;
+  font-size: 1rem;
+  color: #000;
+}
 
 .tiny-text {
   text-align: center;
@@ -49,12 +54,8 @@
 .amplify-button[data-variation='primary'] {
   color: #fff;
   background-color: #8055a4;
-
-  background: linear-gradient(
-    to bottom,
-    #8055a4,
-    var(--amplify-colors-purple-100)
-  );
+  background: linear-gradient(to top, #8055a4, #4d1d74);
+  border-radius: 0;
 }
 
 .amplify-button[data-variation='link'] {

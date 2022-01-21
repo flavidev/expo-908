@@ -9,10 +9,10 @@ import './App.css'
 import { AuthComponents } from './utils/AuthComponents';
 import Main from './pages/Main'
 
-const locales = ["pt-BR"]
+const locales = ["en", "pt-BR"]
 AmplifyI18n.configure(locales)
-I18n.setLanguage("pt-BR")
 I18n.putVocabularies(dictPTBR)
+I18n.setLanguage("pt-BR")
 
 function App() {
   return (
