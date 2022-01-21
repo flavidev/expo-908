@@ -15,7 +15,8 @@ export const dictPTBR = {
             "A senha não cumpre as regras: A senha não é longa o suficiente",
         "Creating Account": "Criando conta",
         "Signing in": "Entrando",
-
+        "Incorrect username or password.": "Nome de usuário ou senha incorretos.",
+        "User does not exist.": "Usuário não existe.",
     },
 
 }
