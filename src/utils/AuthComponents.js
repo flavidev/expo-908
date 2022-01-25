@@ -1,4 +1,4 @@
-import { useTheme, View, Image, Text, Button, useAuthenticator } from "@aws-amplify/ui-react";
+import { useTheme, View, Image, Text, useAuthenticator } from "@aws-amplify/ui-react";
 
 import logo from '../assets/images/eae-logo.png';
 

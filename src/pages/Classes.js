@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Text, Heading } from '@aws-amplify/ui-react';
+import { Button, ScrollView, Text } from '@aws-amplify/ui-react';
 
-import Button from '../components/Button';
 
 const tableOfClasses = [
     // index is the weekday starting on Sunday [0]
@@ -16,66 +15,73 @@ const tableOfClasses = [
 
 const Classes = () => {
 
-    const [currentDay, setCurrentDay] = useState('')
+    const [currentDay, setCurrentDay] = useState('');
 
     return (
         <div style={styles.container}>
-            <div style={styles.weekCalendarMenu}>
-                <Button
-                    onClick={() => setCurrentDay(0)}
-                    text="D"
-                />
-                <Button
-                    onClick={() => setCurrentDay(1)}
-                    text="2ª"
-                />
-                <Button
-                    onClick={() => setCurrentDay(2)}
-                    text="3ª"
-                />
-                <Button
-                    onClick={() => setCurrentDay(3)}
-                    text="4ª"
-                />
-                <Button
-                    onClick={() => setCurrentDay(4)}
-                    text="5ª"
-                />
-                <Button
-                    onClick={() => setCurrentDay(5)}
-                    text="6ª"
-                />
-                <Button
-                    onClick={() => setCurrentDay(6)}
-                    text="S"
-                />
-
+            <div style={styles.buttonContainer}>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(0)}>D</Button>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(1)}>2ª</Button>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(2)}>3ª</Button>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(3)}>4ª</Button>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(4)}>5ª</Button>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(5)}>6ª</Button>
+                <Button className='week-calendar-button' isFullWidth={true} onClick={() => setCurrentDay(6)}>S</Button>
             </div>
 
-            <div style={styles.calendarContainer}>
-                {currentDay === '' && <Heading className='title-text' >Clique em dia da semana para ver as aulas disponíveis</Heading>}
-                {currentDay === 0 && <Heading className='title-text'>Aulas disponíveis para o domingo</Heading>}
-                {currentDay === 1 && <Heading className='title-text'>Aulas disponíveis para a segunda-feira</Heading>}
-                {currentDay === 2 && <Heading className='title-text'>Aulas disponíveis para a terça-feira</Heading>}
-                {currentDay === 3 && <Heading className='title-text'>Aulas disponíveis para a quarta-feira</Heading>}
-                {currentDay === 4 && <Heading className='title-text'>Aulas disponíveis para a quinta-feira</Heading>}
-                {currentDay === 5 && <Heading className='title-text'>Aulas disponíveis para a sexta-feira</Heading>}
-                {currentDay === 6 && <Heading className='title-text'>Aulas disponíveis para o sábado</Heading>}
+            <ScrollView style={styles.calendarContainer}>
+                {currentDay === '' &&
+                    <div style={styles.calendarItem}>
+                        <Text className='small-text-black'>
+                            Escolha o dia da semana acima
+                        </Text>
+                    </div>
+                }
 
-            </div>
+                {currentDay !== '' && <>
+                    {
+                        tableOfClasses[currentDay][0] === undefined &&
+                        <div style={styles.calendarItem}>
+                            <Text className='small-text-black'>Hoje não tem aula</Text>
+                        </div>
+                    }
+
+                    {tableOfClasses[currentDay].map((item, index) => {
+                        return (
+                            <div key={index} style={styles.calendarItem}>
+                                <Text className='small-text-black'>Turma {item}</Text>
+                                <Text className='small-text-black'>Vagas 6/12</Text>
+                            </div>
+                        )
+                    }
+                    )}
+                </>
+                }
+            </ScrollView>
         </div>
+
     )
+}
 
-
-
-};
 
 const styles = {
     container: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center',
+        width: '100vw',
         height: '100%',
+
+    },
+
+    buttonContainer: {
+        display: 'flex',
+        flex: 1,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
     weekCalendarMenu: {
@@ -89,9 +95,23 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '100%',
         justifyContent: 'space-around',
+        height: '100%',
+        width: '100%',
     },
+    calendarItem: {
+        display: 'flex',
+        height: '20%',
+        width: '80%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderRadius: '5px',
+        boxShadow: '0px 0px 5px #000',
+        backgroundColor: '#fff',
+        padding: '5px',
+    },
+
 }
 
 export default Classes;

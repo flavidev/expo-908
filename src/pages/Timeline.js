@@ -1,12 +1,12 @@
-import { Heading } from '@aws-amplify/ui-react';
+import { Text } from '@aws-amplify/ui-react';
 import React from 'react';
 
 const Timeline = (props) => {
     return (
         <div className='container'>
-            <Heading className='title-text'>
+            <Text className='small-text'>
                 Timeline estará disponível em breve
-            </Heading>
+            </Text>
         </div>
     )
 

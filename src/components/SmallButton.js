@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Button(props) {
+export default function SmallButton(props) {
 
     const handleOnClick = () => {
         props.disabled ? alert('Esta funcão estará disponível em breve 💜') : props.onClick();
@@ -17,11 +17,12 @@ export default function Button(props) {
 const styles = {
     container: {
         display: 'flex',
-        width: '100%',
+        width: '12%',
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: '0 12.5px',
+        padding: '5px',
         borderRadius: '5px',
         cursor: 'pointer',
         boxShadow: '0px 0px 5px #000'

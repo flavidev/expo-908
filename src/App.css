@@ -28,10 +28,24 @@
   text-align: center;
 }
 
+.title-text-black {
+  font-size: 5rem;
+  font-family: Azonix;
+  color: #000;
+  margin: 2rem;
+  text-align: center;
+}
+
 .main-text {
   text-align: center;
   font-size: 2.5rem;
   color: #fff;
+}
+
+.main-text-black {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #000;
 }
 
 .small-text {
@@ -60,6 +74,13 @@
 
 .amplify-button[data-variation='link'] {
   color: #8055a4;
+}
+
+.week-calendar-button {
+  background-color: #503662;
+  font-size: 0.85rem;
+  color: #fff;
+  font-family: Azonix;
 }
 
 .amplify-tabs-item[data-state='active'] {
