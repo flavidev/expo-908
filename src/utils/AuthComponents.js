@@ -1,20 +1,21 @@
-import { useTheme, View, Image, Text, useAuthenticator } from "@aws-amplify/ui-react";
+import { View, Image, Text, useAuthenticator } from "@aws-amplify/ui-react";
 
 import logo from '../assets/images/eae-logo.png';
 
 export const AuthComponents = {
     Header() {
 
-        const { tokens } = useTheme();
         return (
-            <View textAlign="center" padding={tokens.space.large} >
+            <View textAlign="center" >
                 <Image
-                    alt="EAE logo"
                     src={logo}
-                    style={{
-                        maxWidth: '40vw',
-                        maxHeight: '40vh',
-                    }}
+                    alt="EAE logo"
+                    margin="2.5%"
+                    width="30vw"
+                    height="30vw"
+                    maxHeight="200px"
+                    maxWidth="200px"
+
                 />
             </View>
         );
@@ -23,10 +24,13 @@ export const AuthComponents = {
     Footer() {
 
         return (
-            <View textAlign="center">
-                <p className="tiny-text">
+            <View textAlign="center" margin='5px' >
+                <Text
+                    color={'#fff'}
+                    fontSize={'0.8rem'}
+                >
                     &copy; Desenvolvido por All Access Consultoria Ltda.
-                </p>
+                </Text>
             </View>
         );
     },
@@ -39,7 +43,6 @@ export const AuthComponents = {
             return (
                 <View style={{
                     display: "flex",
-                    flex: 1,
                     backgroundColor: "#fff",
                     paddingBottom: "44px",
                     justifyContent: "center",

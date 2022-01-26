@@ -17,6 +17,7 @@ export const dictPTBR = {
         "Signing in": "Entrando",
         "Incorrect username or password.": "Nome de usuário ou senha incorretos.",
         "User does not exist.": "Usuário não existe.",
+        "Confirming": "Confirmando",
     },
 
 }

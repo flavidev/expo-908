@@ -21,7 +21,7 @@ function App() {
       <AmplifyProvider >
         <Authenticator
           components={AuthComponents}
-          signUpAttributes={['email']}
+          signUpAttributes={['email', "given_name", "name"]}
           loginMechanisms={['email']}
         >
           {({ signOut, user }) => (

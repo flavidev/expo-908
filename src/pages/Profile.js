@@ -4,8 +4,8 @@ import Button from '../components/Button';
 const Profile = (props) => {
     return (
         <div style={styles.container}>
-            <Button onClick={props.signOut} text="Meus dados" disabled={true} />
-            <Button onClick={props.signOut} text="Carteira" disabled={true} />
+            <Button text="Perfil" disabled={true} />
+            <Button text="Planos" disabled={true} />
             <Button onClick={props.signOut} text="Sair" />
         </div>
     )

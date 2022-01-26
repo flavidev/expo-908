@@ -9,8 +9,7 @@ import BottomTabs from '../components/BottomTabs'
 
 function Main(props) {
 
-    const userEmail = props.user.attributes.email
-
+    const user = props.user.attributes
     const [isTimeline, setIsTimeline] = useState(true)
     const [isClasses, setIsClasses] = useState(false)
     const [isProfile, setIsProfile] = useState(false)
@@ -36,7 +35,7 @@ function Main(props) {
     return (
         <div style={styles.container}>
             <div style={styles.headerContainer}>
-                <Header userEmail={userEmail} />
+                <Header user={user} />
             </div>
             <div style={styles.bodyContainer}>
                 {isTimeline &&
