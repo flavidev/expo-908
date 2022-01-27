@@ -40,7 +40,7 @@ const Classes = () => {
                 {currentDay === '' &&
                     <div >
                         <Text className='small-text'>
-                            Escolha o dia da semana acima no menu acima
+                            Escolha o dia da semana no menu acima
                         </Text>
                     </div>
                 }
