@@ -6,7 +6,6 @@ const BottomTabs = (props) => {
 
     return (
         <div style={styles.container}>
-
             <Button
                 isFullWidth={true}
                 className='selector-small-button'
@@ -43,11 +42,10 @@ const BottomTabs = (props) => {
 const styles = {
     container: {
         display: 'flex',
-        flex: 1,
+        height: '100%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginVertical: '10px',
     },
     tabContainer: {
         display: 'flex',

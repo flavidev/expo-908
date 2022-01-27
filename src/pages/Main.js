@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { View, Heading, Image } from '@aws-amplify/ui-react'
 
 import Timeline from './Timeline'
 import Classes from './Classes'
@@ -6,6 +7,8 @@ import Account from './Account'
 
 import Header from '../components/Header'
 import BottomTabs from '../components/BottomTabs'
+
+import logo from '../assets/images/eae-logo.png'
 
 function Main(props) {
 
@@ -38,6 +41,12 @@ function Main(props) {
                 <Header user={user} />
             </div>
             <div style={styles.bodyContainer}>
+                {!isTimeline && !isClasses && !isAccount &&
+                    <View className='container' >
+                        <Image src={logo} style={styles.logo} className='bouncing' />
+                        <Heading level={6} color={"#fff"}> Selecione uma das opções abaixo </Heading>
+                    </View>
+                }
                 {isTimeline &&
                     <Timeline />
                 }
@@ -88,7 +97,12 @@ const styles = {
         flex: 1,
         backgroundColor: '#553565',
         width: '100%',
-    }
+    },
+    logo: {
+        width: '30vw',
+        marginBottom: '7.5vh',
+        maxWidth: '50%',
+    },
 }
 
 export default Main

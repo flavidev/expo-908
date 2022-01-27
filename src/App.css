@@ -100,3 +100,18 @@
   color: #464646;
   border-color: #8055a4;
 }
+
+.bouncing {
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0) translateX(-30vw) scale(1.25) rotate(-50deg);
+  }
+
+  50% {
+    transform: translateY(10px) translateX(30vw) scale(1) rotate(100deg);
+    rotate: 0;
+  }
+}

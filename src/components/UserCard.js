@@ -20,16 +20,16 @@ export const UserCard = (props) => {
 
     return (
         <View style={styles.container} >
-            <Card>
-                <Flex>
-                    <Flex alignItems={'center'}>
+            <Card width="100%" >
+                <Flex justifyContent="space-between">
+                    <Flex alignItems='center' justifyContent="center" width="100%" >
                         <Text>
                             {event.day}
                         </Text>
                         <Text>
                             {event.starts} {event.ends}
                         </Text>
-                        <Text>
+                        <Text textAlign="center">
                             Vagas <Badge>{event.availableSpots}</Badge>
                         </Text>
                     </Flex>
@@ -45,7 +45,7 @@ const styles = {
     container: {
         display: 'flex',
         backgroundColor: '#fff',
-        width: '90vw',
+        width: '80%',
         height: '20%',
         justifyContent: 'center',
         alignItems: 'center',
