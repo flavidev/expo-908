@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from '@aws-amplify/ui-react';
 
-function Profile(props) {
+function Plans(props) {
     return (
         <div className='container'>
             <Text className='small-text'>
@@ -11,4 +11,4 @@ function Profile(props) {
     )
 }
 
-export default Profile;
+export default Plans;

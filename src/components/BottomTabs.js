@@ -14,7 +14,7 @@ const BottomTabs = (props) => {
                 <IconSportsSoccer style={styles.icon} />
                 <Text className='tiny-text'>Aulas</Text>
             </div>
-            <div style={styles.tabContainer} onClick={props.setIsProfile}>
+            <div style={styles.tabContainer} onClick={props.setIsAccount}>
                 <IconPerson style={styles.icon} />
                 <Text className='tiny-text'>Conta</Text>
             </div>

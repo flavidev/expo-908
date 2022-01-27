@@ -31,9 +31,9 @@ const Classes = () => {
 
             <ScrollView style={styles.calendarContainer}>
                 {currentDay === '' &&
-                    <div style={styles.calendarItem}>
-                        <Text className='small-text-black'>
-                            Escolha o dia da semana acima
+                    <div >
+                        <Text className='small-text'>
+                            Escolha o dia da semana acima no menu acima
                         </Text>
                     </div>
                 }

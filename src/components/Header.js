@@ -13,9 +13,9 @@ function Header(props) {
             <div style={styles.userInfoContainer}>
                 <Text className='small-text'> {given_name} {name} </Text>
                 <Text className='small-text'> {email} </Text>
-                <Text className='small-text'> Plano atual: 2x Semana</Text>
                 <Text className='small-text'> Status financeiro: ATIVO </Text>
-                <Text className='small-text'> Créditos semanais: 2 </Text>
+                <Text className='small-text'> Plano atual: Em Breve</Text>
+                <Text className='small-text'> Créditos semanais: Em Breve </Text>
             </div>
 
         </div>
@@ -41,8 +41,8 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        alignText: 'center',
         margin: '10px',
+        alignItems: 'flex-end',
     }
 }
 

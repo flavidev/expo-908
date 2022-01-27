@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import Timeline from '../pages/Timeline'
-import Classes from '../pages/Classes'
-import Profile from '../pages/Profile'
+import Timeline from './Timeline'
+import Classes from './Classes'
+import Account from './Account'
 
 import Header from '../components/Header'
 import BottomTabs from '../components/BottomTabs'
@@ -10,26 +10,26 @@ import BottomTabs from '../components/BottomTabs'
 function Main(props) {
 
     const user = props.user.attributes
-    const [isTimeline, setIsTimeline] = useState(true)
+    const [isTimeline, setIsTimeline] = useState(false)
     const [isClasses, setIsClasses] = useState(false)
-    const [isProfile, setIsProfile] = useState(false)
+    const [isAccount, setIsAccount] = useState(false)
 
     const handleSetIsTimeline = () => {
-        setIsTimeline(true)
         setIsClasses(false)
-        setIsProfile(false)
+        setIsAccount(false)
+        setIsTimeline(true)
     }
 
     const handleSetIsClasses = () => {
         setIsTimeline(false)
+        setIsAccount(false)
         setIsClasses(true)
-        setIsProfile(false)
     }
 
-    const handleSetIsProfile = () => {
+    const handleSetIsAccount = () => {
         setIsTimeline(false)
         setIsClasses(false)
-        setIsProfile(true)
+        setIsAccount(true)
     }
 
     return (
@@ -44,8 +44,9 @@ function Main(props) {
                 {isClasses &&
                     <Classes />
                 }
-                {isProfile &&
-                    <Profile
+                {isAccount &&
+                    <Account
+                        user={user}
                         signOut={props.signOut}
                     />
                 }
@@ -54,7 +55,7 @@ function Main(props) {
                 <BottomTabs
                     setIsTimeline={handleSetIsTimeline}
                     setIsClasses={handleSetIsClasses}
-                    setIsProfile={handleSetIsProfile}
+                    setIsAccount={handleSetIsAccount}
                 />
             </div>
         </div>
