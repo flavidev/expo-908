@@ -33,7 +33,9 @@ export const UserCard = (props) => {
                             Vagas <Badge>{event.availableSpots}</Badge>
                         </Text>
                     </Flex>
-                    <Button style={styles.button}>Entrar</Button>
+                    <Button
+                        onClick={() => alert("Em breve 💜")}
+                        style={styles.button}>Entrar</Button>
                 </Flex>
             </Card>
         </View >
