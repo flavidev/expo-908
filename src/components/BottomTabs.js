@@ -1,23 +1,40 @@
 import React from 'react';
-import { Text, IconCalendarToday, IconPerson, IconSportsSoccer } from '@aws-amplify/ui-react';
-
+import { Text, IconCalendarToday, IconPerson, IconSportsSoccer, } from '@aws-amplify/ui-react';
+import { Button } from '@aws-amplify/ui-react';
 
 const BottomTabs = (props) => {
 
     return (
         <div style={styles.container}>
-            <div style={styles.tabContainer} onClick={props.setIsTimeline}>
+
+            <Button
+                isFullWidth={true}
+                className='selector-small-button'
+                style={styles.tabContainer}
+                onClick={props.setIsTimeline}
+            >
                 <IconCalendarToday style={styles.icon} />
-                <Text className='tiny-text'>Timeline</Text>
-            </div>
-            <div style={styles.tabContainer} onClick={props.setIsClasses}>
+                Timeline
+            </Button>
+
+            <Button
+                isFullWidth={true}
+                className='selector-small-button'
+                style={styles.tabContainer}
+                onClick={props.setIsClasses}
+            >
                 <IconSportsSoccer style={styles.icon} />
-                <Text className='tiny-text'>Aulas</Text>
-            </div>
-            <div style={styles.tabContainer} onClick={props.setIsAccount}>
+                Aulas
+            </Button>
+            <Button
+                isFullWidth={true}
+                className='selector-small-button'
+                style={styles.tabContainer}
+                onClick={props.setIsAccount}
+            >
                 <IconPerson style={styles.icon} />
-                <Text className='tiny-text'>Conta</Text>
-            </div>
+                Conta
+            </Button>
 
         </div>
     )
@@ -35,15 +52,9 @@ const styles = {
     tabContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        margin: '10px',
-        cursor: 'pointer',
     },
     icon: {
-        fontSize: '2.5rem',
-        color: 'white',
+        fontSize: '1.5rem',
     }
 }
 

@@ -31,6 +31,7 @@ const styles = {
     },
     profilePicture: {
         borderRadius: '50%',
+        border: '1px solid white',
         flex: 1,
         margin: '10px',
         maxHeight: '200px',

@@ -83,6 +83,14 @@
   font-family: Azonix;
 }
 
+.selector-small-button {
+  background-color: #503662;
+  font-size: 0.75rem;
+  color: #fff;
+  font-family: Azonix;
+  border: 0;
+}
+
 .amplify-tabs-item[data-state='active'] {
   color: #8055a4;
   border-color: #fff;

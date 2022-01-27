@@ -84,7 +84,9 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'space-around',
     },
-
+    areaContainer: {
+        height: "100%",
+    },
     button: {
         color: "#000",
         backgroundColor: "#fff",
@@ -92,6 +94,7 @@ const styles = {
         height: "7.5vh",
         borderRadius: "5px",
         border: "1px solid #000",
+        margin: "5px",
     }
 }
 export default Account
