@@ -5,7 +5,7 @@ function Plans(props) {
     return (
         <div className='container'>
             <Text className='small-text'>
-                Perfil Disponível em breve
+                Caixa de seleção com os planos disponíveis para o usuário.
             </Text>
         </div>
     )

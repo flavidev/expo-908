@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, IconCalendarToday, IconPerson, IconSportsSoccer, } from '@aws-amplify/ui-react';
+import { IconCalendarToday, IconPerson, IconSportsSoccer, } from '@aws-amplify/ui-react';
 import { Button } from '@aws-amplify/ui-react';
 
 const BottomTabs = (props) => {

@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { Button, ScrollView, Text } from '@aws-amplify/ui-react';
 
+import { UserCard } from '../components/UserCard';
+
 
 const tableOfClasses = [
-    // index is the weekday starting on Sunday [0]
-    [],
-    [],
-    ["07:00 - 08:00", "08:00 - 09:00", "18:00 - 19:00"],
-    ["09:30 - 10:30", "17:00 - 18:00"],
-    ["07:00 - 08:00", "08:00 - 09:00", "18:00 - 19:00"],
-    ["09:30 - 10:30", "17:00 - 18:00"],
-    ["08:30 - 09:30", "09:30 - 10:30"],
+    { day: "Domingo", events: [] },
+
+    { day: "Segunda", events: [] },
+
+    { day: "Terça", events: [{ title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "7" }, { title: "Altinha", "starts": "08:00", "ends": "09:00", availableSpots: "2" }, { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "1" }] },
+
+    { day: "Quarta", events: [{ title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "10" }, { title: "Altinha", "starts": "17:00", "ends": "18:00", availableSpots: "1" }] },
+
+    { day: "Quinta", events: [{ title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "8" }, { title: "Altinha", "starts": "08:00", "ends": "09:00", availableSpots: "4" }, { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "9" }] },
+
+    { day: "Sexta", events: [{ title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "5" }, { title: "Altinha", "starts": "17:00", "ends": "18:00", availableSpots: "11" }] },
+
+    { day: "Sábado", events: [{ title: "Altinha", starts: "08:30", ends: "09:30", availableSpots: "5" }, { title: "Altinha", "starts": "09:30", "ends": "10:30", availableSpots: "7" }] },
 ]
 
 const Classes = () => {
@@ -40,18 +47,22 @@ const Classes = () => {
 
                 {currentDay !== '' && <>
                     {
-                        tableOfClasses[currentDay][0] === undefined &&
+                        tableOfClasses[currentDay].events.length < 1 &&
                         <div style={styles.calendarItem}>
-                            <Text className='small-text-black'>Hoje não tem aula</Text>
+                            <Text className='small-text-black'> {tableOfClasses[currentDay].day} não tem aula</Text>
                         </div>
                     }
 
-                    {tableOfClasses[currentDay].map((item, index) => {
+                    {tableOfClasses[currentDay].events.map((item, index) => {
                         return (
-                            <div key={index} style={styles.calendarItem}>
-                                <Text className='small-text-black'>Turma {item}</Text>
-                                <Text className='small-text-black'>Vagas 6/12</Text>
-                            </div>
+                            <UserCard
+                                key={index}
+                                title={item.title}
+                                day={tableOfClasses[currentDay].day}
+                                starts={item.starts}
+                                ends={item.ends}
+                                availableSpots={item.availableSpots}
+                            />
                         )
                     }
                     )}

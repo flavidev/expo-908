@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text } from '@aws-amplify/ui-react';
 
-function Profile(props) {
+function Contact() {
     return (
         <div className='container'>
             <Text className='small-text'>
-                Perfil Disponível em breve
+                Caixa de contato com telefone /  whatsapp / formulário de email.
             </Text>
         </div>
     )
 }
 
-export default Profile;
+export default Contact;

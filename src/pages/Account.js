@@ -1,55 +1,55 @@
 import React, { useState } from 'react';
 import { Button } from '@aws-amplify/ui-react';
 
-import Profile from './Profile';
 import Plans from './Plans';
 import About from './About';
+import Contact from './Contact';
 
 const Account = (props) => {
 
     const [isPlans, setIsPlans] = useState(false)
-    const [isProfile, setIsProfile] = useState(false)
     const [isAbout, setIsAbout] = useState(false)
+    const [IsContact, setIsContact] = useState(false)
 
     const handleSetIsPlan = () => {
         setIsPlans(true)
-        setIsProfile(false)
+        setIsContact(false)
         setIsAbout(false)
     }
 
-    const handleSetIsProfile = () => {
+    const handleSetIsContact = () => {
         setIsPlans(false)
-        setIsProfile(true)
+        setIsContact(true)
         setIsAbout(false)
     }
 
     const handleSetIsAbout = () => {
         setIsPlans(false)
-        setIsProfile(false)
+        setIsContact(false)
         setIsAbout(true)
     }
 
     const handleGoBack = () => {
         setIsPlans(false)
-        setIsProfile(false)
+        setIsContact(false)
         setIsAbout(false)
     }
 
     return (
         <div style={styles.container}>
-            {!isPlans && !isProfile && !isAbout &&
+            {!isPlans && !IsContact && !isAbout &&
                 <>
-                    <Button style={styles.button} onClick={handleSetIsProfile} >Perfil</Button>
                     <Button style={styles.button} onClick={handleSetIsPlan} >Planos</Button>
                     <Button style={styles.button} onClick={handleSetIsAbout} >Sobre</Button>
+                    <Button style={styles.button} onClick={handleSetIsContact} >Contato</Button>
                     <Button style={styles.button} onClick={props.signOut}>Sair</Button>
                 </>
             }
 
-            {isProfile &&
+            {IsContact &&
                 <>
                     <div style={styles.areaContainer}>
-                        <Profile />
+                        <Contact user={props.user} />
                     </div>
                     <Button style={styles.button} onClick={handleGoBack}>Voltar</Button>
                 </>
