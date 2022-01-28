@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, ScrollView, Text } from '@aws-amplify/ui-react';
 
-import { UserCard } from '../components/UserCard';
+import { ClassCard } from '../components/ClassCard';
 
 
 const tableOfClasses = [
@@ -55,7 +55,7 @@ const Classes = () => {
 
                     {tableOfClasses[currentDay].events.map((item, index) => {
                         return (
-                            <UserCard
+                            <ClassCard
                                 key={index}
                                 title={item.title}
                                 day={tableOfClasses[currentDay].day}

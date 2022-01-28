@@ -8,7 +8,7 @@ import {
 } from '@aws-amplify/ui-react';
 
 
-export const UserCard = (props) => {
+export const ClassCard = (props) => {
 
     const event = {
         title: props.title,
