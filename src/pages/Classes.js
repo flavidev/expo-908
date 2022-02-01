@@ -15,7 +15,7 @@ const tableOfClasses = [
 
     { day: "Quinta", events: [{ title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "8" }, { title: "Altinha", "starts": "08:00", "ends": "09:00", availableSpots: "4" }, { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "9" }] },
 
-    { day: "Sexta", events: [{ title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "5" }, { title: "Altinha", "starts": "17:00", "ends": "18:00", availableSpots: "11" }] },
+    { day: "Sexta", events: [{ title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "2" }, { title: "Altinha", "starts": "17:00", "ends": "18:00", availableSpots: "11" }] },
 
     { day: "Sábado", events: [{ title: "Altinha", starts: "08:30", ends: "09:30", availableSpots: "5" }, { title: "Altinha", "starts": "09:30", "ends": "10:30", availableSpots: "7" }] },
 ]
