@@ -9,5 +9,11 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string"
         }
+    },
+    "storage": {
+        "imagebuckets3": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

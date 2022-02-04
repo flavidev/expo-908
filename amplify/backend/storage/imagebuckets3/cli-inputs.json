@@ -1,0 +1,14 @@
+{
+  "resourceName": "imagebuckets3",
+  "policyUUID": "a3a8871c",
+  "bucketName": "expo908730bfd57b0d3438ea2e360a35a5c912e",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

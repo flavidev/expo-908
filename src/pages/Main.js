@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Heading, Image } from '@aws-amplify/ui-react'
+import { Storage } from 'aws-amplify'
 
 import Timeline from './Timeline'
 import Classes from './Classes'
@@ -9,13 +10,27 @@ import Header from '../components/Header'
 import BottomTabs from '../components/BottomTabs'
 
 import logo from '../assets/images/eae-logo.png'
+import defaultProfilePicture from '../assets/images/profile.png'
 
 function Main(props) {
 
-    const user = props.user.attributes
+
     const [isTimeline, setIsTimeline] = useState(false)
     const [isClasses, setIsClasses] = useState(false)
     const [isAccount, setIsAccount] = useState(false)
+    const [user, setUser] = useState({ ...props.user.attributes, picture: defaultProfilePicture })
+
+    useEffect(() => {
+        getNewProfilePicture()
+    }, []);
+
+    async function getNewProfilePicture() {
+        const key = props.user.attributes.given_name + props.user.attributes.name + "-picture.png"
+        await Storage.get(key, { download: true })
+            .then((resp) => { return URL.createObjectURL(resp.Body) })
+            .catch((err) => { console.log(err) })
+            .then((url) => { setUser({ ...user, picture: url }) })
+    }
 
     const handleSetIsTimeline = () => {
         setIsClasses(false)
@@ -56,6 +71,7 @@ function Main(props) {
                 {isAccount &&
                     <Account
                         user={user}
+                        setUser={setUser}
                         signOut={props.signOut}
                     />
                 }

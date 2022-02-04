@@ -1,22 +1,23 @@
 import React from 'react';
 import { Text, Image } from '@aws-amplify/ui-react';
 
-
-import profilePicture from '../assets/images/profile.png';
-
 function Header(props) {
-    const { email, given_name, name } = props.user;
+
+    const { email, given_name, name, picture } = props.user;
+
     return (
         <div style={styles.container}>
-
-            <Image height="25%" width="25%" style={styles.profilePicture} src={profilePicture} />
-
+            <Image
+                style={styles.profilePicture}
+                src={picture}
+                alt="profile"
+            />
             <div style={styles.userInfoContainer}>
                 <Text className='small-text'> {given_name} {name} </Text>
                 <Text className='small-text'> {email} </Text>
                 <Text className='small-text'> Status financeiro: ATIVO </Text>
-                <Text className='small-text'> Plano atual: Em breve</Text>
-                <Text className='small-text'> Créditos semanais: Em breve </Text>
+                <Text className='small-text'> Plano vigente: em breve</Text>
+                <Text className='small-text'> Créditos semanais: em breve </Text>
             </div>
 
         </div>
@@ -29,22 +30,32 @@ const styles = {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        margin: '0 0.5rem',
+        margin: '0.5rem',
     },
+
     profilePicture: {
+        flex: 1,
         borderRadius: '50%',
         border: '1px solid white',
-        flex: 1,
-        margin: '10px',
         maxHeight: '200px',
         maxWidth: '200px',
+        height: "30vw",
+        width: "25vw",
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    inputButton: {
+        backgroundColor: 'blue',
+        color: 'white',
+        border: 'none',
+        width: '100%',
     },
     userInfoContainer: {
         flex: 2,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around',
-        margin: '10px',
+        justifyContent: 'space-between',
         alignItems: 'flex-end',
     }
 }
