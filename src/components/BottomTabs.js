@@ -13,7 +13,7 @@ const BottomTabs = (props) => {
                 onClick={props.setIsTimeline}
             >
                 <IconCalendarToday style={styles.icon} />
-                Timeline
+                Mural
             </Button>
 
             <Button
