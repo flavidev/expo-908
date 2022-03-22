@@ -1,68 +1,25 @@
 import React, { useState } from "react";
+import { useAxios } from "use-axios-client";
 import { Button, ScrollView, Text } from "@aws-amplify/ui-react";
 
 import { ClassCard } from "../components/ClassCard";
-
-const tableOfClasses = [
-  { day: "Domingo", events: [] },
-
-  { day: "Segunda", events: [] },
-
-  {
-    day: "Terça",
-    events: [
-      { title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "7" },
-      { title: "Altinha", starts: "08:00", ends: "09:00", availableSpots: "2" },
-      { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "1" },
-    ],
-  },
-
-  {
-    day: "Quarta",
-    events: [
-      {
-        title: "Altinha",
-        starts: "09:30",
-        ends: "10:30",
-        availableSpots: "10",
-      },
-      { title: "Altinha", starts: "17:00", ends: "18:00", availableSpots: "1" },
-    ],
-  },
-
-  {
-    day: "Quinta",
-    events: [
-      { title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "8" },
-      { title: "Altinha", starts: "08:00", ends: "09:00", availableSpots: "4" },
-      { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "9" },
-    ],
-  },
-
-  {
-    day: "Sexta",
-    events: [
-      { title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "2" },
-      {
-        title: "Altinha",
-        starts: "17:00",
-        ends: "18:00",
-        availableSpots: "11",
-      },
-    ],
-  },
-
-  {
-    day: "Sábado",
-    events: [
-      { title: "Altinha", starts: "08:30", ends: "09:30", availableSpots: "5" },
-      { title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "7" },
-    ],
-  },
-];
+import { Spinner } from "../components/Spinner";
 
 const Classes = () => {
   const [currentDay, setCurrentDay] = useState("");
+
+  const { data, loading, error } = useAxios({
+    url: "https://v2ph0dafi3.execute-api.sa-east-1.amazonaws.com/dev/eae/classes",
+    method: "GET",
+  });
+
+  if (loading || !data)
+    return (
+      <div style={styles.container}>
+        <Spinner />;
+      </div>
+    );
+  if (error) return "Error!";
 
   return (
     <div style={styles.container}>
@@ -129,21 +86,21 @@ const Classes = () => {
 
         {currentDay !== "" && (
           <>
-            {tableOfClasses[currentDay].events.length < 1 && (
+            {data.body[currentDay].events.length < 1 && (
               <div style={styles.calendarItem}>
                 <Text className="small-text-black">
                   {" "}
-                  {tableOfClasses[currentDay].day} não tem aula
+                  {data.body[currentDay].day} não tem aula
                 </Text>
               </div>
             )}
 
-            {tableOfClasses[currentDay].events.map((item, index) => {
+            {data.body[currentDay].events.map((item, index) => {
               return (
                 <ClassCard
                   key={index}
                   title={item.title}
-                  day={tableOfClasses[currentDay].day}
+                  day={data.body[currentDay].day}
                   starts={item.starts}
                   ends={item.ends}
                   availableSpots={item.availableSpots}

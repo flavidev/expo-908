@@ -6,7 +6,7 @@
   height: 100vh;
   width: 100vw;
   background-color: #8055a4;
-  background: url('./assets/images/background.png');
+  background: url("./assets/images/background.png");
   background-position: center;
   background-size: cover;
 }
@@ -65,14 +65,14 @@
   color: #fff;
 }
 
-.amplify-button[data-variation='primary'] {
+.amplify-button[data-variation="primary"] {
   color: #fff;
   background-color: #8055a4;
   background: linear-gradient(to top, #8055a4, #4d1d74);
   border-radius: 0;
 }
 
-.amplify-button[data-variation='link'] {
+.amplify-button[data-variation="link"] {
   color: #8055a4;
 }
 
@@ -91,7 +91,7 @@
   border: 0;
 }
 
-.amplify-tabs-item[data-state='active'] {
+.amplify-tabs-item[data-state="active"] {
   color: #8055a4;
   border-color: #fff;
 }
@@ -99,6 +99,15 @@
 .amplify-tabs-item {
   color: #464646;
   border-color: #8055a4;
+}
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #464646;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
 }
 
 .bouncing {
@@ -109,9 +118,17 @@
   100% {
     transform: translateY(0) translateX(-30vw) scale(1.25) rotate(-50deg);
   }
-
   50% {
     transform: translateY(10px) translateX(30vw) scale(1) rotate(100deg);
     rotate: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

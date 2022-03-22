@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { View, Heading, Image } from "@aws-amplify/ui-react";
-import { Storage } from "aws-amplify";
 
 import Timeline from "./Timeline";
 import Classes from "./Classes";
@@ -10,7 +9,6 @@ import Header from "../components/Header";
 import BottomTabs from "../components/BottomTabs";
 
 import logo from "../assets/images/eae-logo.png";
-import defaultProfilePicture from "../assets/images/profile.png";
 
 import { checkUser } from "../utils/checkUser";
 
@@ -20,7 +18,6 @@ function Main(props) {
   const [isAccount, setIsAccount] = useState(false);
   const [user, setUser] = useState({
     ...props.user.attributes,
-    picture: defaultProfilePicture,
     isAdmin: false,
   });
 
@@ -28,37 +25,12 @@ function Main(props) {
     getIsAdmin();
   }, [user.isAdmin]);
 
-  useEffect(() => {
-    getSavedProfilePicture();
-  }, []);
-
   async function getIsAdmin() {
     if (user.isAdmin) {
       return;
     }
     const isAdmin = await checkUser();
     setUser({ ...user, isAdmin });
-  }
-
-  async function getSavedProfilePicture() {
-    const key =
-      props.user.attributes.given_name +
-      props.user.attributes.name +
-      "-picture.png";
-    //list and find a file in bucket
-    const list = await Storage.list(key);
-    if (list.length > 0) {
-      await Storage.get(key, { download: true })
-        .then((resp) => {
-          return URL.createObjectURL(resp.Body);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then((url) => {
-          setUser({ ...user, picture: url });
-        });
-    }
   }
 
   const handleSetIsTimeline = () => {
@@ -84,6 +56,7 @@ function Main(props) {
       <div style={styles.headerContainer}>
         <Header user={user} />
       </div>
+
       <div style={styles.bodyContainer}>
         {!isTimeline && !isClasses && !isAccount && (
           <View className="container">
