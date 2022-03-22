@@ -47,6 +47,7 @@ export const ProfilePicture = (props) => {
         }
       );
       console.log(response);
+      window.localStorage.clear();
       getSavedProfilePicture();
     } catch (error) {
       console.log("Error uploading file:", error);
