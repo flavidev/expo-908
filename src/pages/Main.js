@@ -8,7 +8,7 @@ import Account from "./Account";
 import Header from "../components/Header";
 import BottomTabs from "../components/BottomTabs";
 
-import logo from "../assets/images/eae-logo.png";
+import logo from "../assets/images/eae-logo-1.png";
 
 import { checkUser } from "../utils/checkUser";
 
@@ -60,9 +60,9 @@ function Main(props) {
       <div style={styles.bodyContainer}>
         {!isTimeline && !isClasses && !isAccount && (
           <View className="container">
-            <Image src={logo} style={styles.logo} className="bouncing" />
+            <Image src={logo} style={styles.logo} />
             <Heading level={6} color={"#fff"}>
-              Navegue pelos menus no rodapé {user.isAdmin && "Admin"}
+              Selecione um campo no menu do rodapé {user.isAdmin && "Admin"}
             </Heading>
           </View>
         )}
@@ -110,9 +110,8 @@ const styles = {
     width: "100%",
   },
   logo: {
-    width: "30vw",
-    marginBottom: "7.5vh",
-    maxWidth: "50%",
+    width: "50vw",
+    maxWidth: "250px",
   },
 };
 
