@@ -12,9 +12,9 @@ export const ProfilePicture = (props) => {
     getSavedProfilePicture();
   }, []);
 
+  const key = props.user.sub + ".png";
+
   async function getSavedProfilePicture() {
-    const key = props.user.given_name + props.user.name + "-picture.png";
-    console.log(key);
     const list = await Storage.list(key);
     if (list.length > 0) {
       await Storage.get(key, { download: true })
@@ -36,19 +36,17 @@ export const ProfilePicture = (props) => {
   async function handleFile(file) {
     setIsLoading(true);
     try {
-      const response = await Storage.put(
-        props.user.given_name + props.user.name + "-picture.png",
-        file,
-        {
-          contentType: "image/png",
-          progressCallback: (progress) => {
-            console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-          },
-        }
-      );
+      const response = await Storage.put(key, file, {
+        contentType: "image/png",
+        progressCallback: (progress) => {
+          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+        },
+      });
       console.log(response);
-      getSavedProfilePicture();
       window.location.reload(true);
+      setTimeout(() => {
+        getSavedProfilePicture();
+      }, 5000);
     } catch (error) {
       console.log("Error uploading file:", error);
     }
