@@ -48,10 +48,9 @@ export const ProfilePicture = (props) => {
         },
       });
       console.log(response);
-
-      //clear cached profile picture image from browser
-      URL.revokeObjectURL(profilePicture);
-      getSavedProfilePicture();
+      setIsLoading(false);
+      const uploadedImage = URL.createObjectURL(file);
+      setProfilePicture(uploadedImage);
     } catch (error) {
       console.log("Error uploading file:", error);
     }
