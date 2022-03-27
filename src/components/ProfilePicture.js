@@ -36,6 +36,11 @@ export const ProfilePicture = (props) => {
   async function handleFile(file) {
     setIsLoading(true);
     try {
+      const list = await Storage.list(key);
+      if (list.length > 0) {
+        await Storage.remove(key);
+      }
+
       const response = await Storage.put(key, file, {
         contentType: "image/png",
         progressCallback: (progress) => {
@@ -43,10 +48,10 @@ export const ProfilePicture = (props) => {
         },
       });
       console.log(response);
-      window.location.reload(true);
-      setTimeout(() => {
-        getSavedProfilePicture();
-      }, 5000);
+
+      //clear cached profile picture image from browser
+      URL.revokeObjectURL(profilePicture);
+      getSavedProfilePicture();
     } catch (error) {
       console.log("Error uploading file:", error);
     }
