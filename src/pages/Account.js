@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Button } from "@aws-amplify/ui-react";
+import { Button, Image } from "@aws-amplify/ui-react";
 
 import Plans from "./Plans";
 import About from "./About";
 import Contact from "./Contact";
+
+import arrow from "../assets/images/arrow-back.png";
 
 const Account = (props) => {
   const [isPlans, setIsPlans] = useState(false);
@@ -38,18 +40,22 @@ const Account = (props) => {
     <div style={styles.container}>
       {!isPlans && !IsContact && !isAbout && (
         <>
-          <Button style={styles.button} onClick={handleSetIsPlan}>
-            Planos
-          </Button>
-          <Button style={styles.button} onClick={handleSetIsAbout}>
-            Sobre
-          </Button>
-          <Button style={styles.button} onClick={handleSetIsContact}>
-            Contato
-          </Button>
-          <Button style={styles.button} onClick={props.signOut}>
-            Sair
-          </Button>
+          <div style={styles.buttonsRow}>
+            <Button style={styles.button} onClick={handleSetIsPlan}>
+              Planos
+            </Button>
+            <Button style={styles.button} onClick={handleSetIsAbout}>
+              Sobre
+            </Button>
+          </div>
+          <div style={styles.buttonsRow}>
+            <Button style={styles.button} onClick={handleSetIsContact}>
+              Contato
+            </Button>
+            <Button style={styles.button} onClick={props.signOut}>
+              Sair
+            </Button>
+          </div>
         </>
       )}
 
@@ -60,6 +66,7 @@ const Account = (props) => {
           </div>
         </>
       )}
+
       {isPlans && (
         <>
           <div style={styles.areaContainer}>
@@ -67,6 +74,7 @@ const Account = (props) => {
           </div>
         </>
       )}
+
       {isAbout && (
         <>
           <div style={styles.areaContainer}>
@@ -74,10 +82,9 @@ const Account = (props) => {
           </div>
         </>
       )}
+
       {(IsContact || isPlans || isAbout) && (
-        <Button style={styles.button} onClick={handleGoBack}>
-          Voltar
-        </Button>
+        <Image src={arrow} style={styles.goBackArrow} onClick={handleGoBack} />
       )}
     </div>
   );
@@ -92,17 +99,32 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-around",
   },
+  buttonsRow: {
+    display: "flex",
+    flex: 1,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    margin: "0 4rem",
+    alignItems: "center",
+  },
   areaContainer: {
     height: "100%",
   },
   button: {
     color: "#000",
     backgroundColor: "#fff",
-    width: "30vw",
-    height: "7.5vh",
+    boxShadow: "0px 0px 5px #000",
+    width: "33.33vw",
+    height: "10vh",
     borderRadius: "5px",
     border: "1px solid #000",
-    margin: "5px",
+  },
+  goBackArrow: {
+    margin: "0.5rem 0 0.5rem 0",
+    width: "15vw",
+    maxWidth: "50px",
   },
 };
+
 export default Account;

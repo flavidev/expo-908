@@ -8,18 +8,10 @@ import { Spinner } from "../components/Spinner";
 const Classes = () => {
   const [currentDay, setCurrentDay] = useState("");
 
-  const { data, loading, error } = useAxios({
+  const { data, loading } = useAxios({
     url: "https://v2ph0dafi3.execute-api.sa-east-1.amazonaws.com/dev/eae/classes",
     method: "GET",
   });
-
-  if (loading || !data)
-    return (
-      <div style={styles.container}>
-        <Spinner />;
-      </div>
-    );
-  if (error) return "Error!";
 
   return (
     <div style={styles.container}>
@@ -76,6 +68,8 @@ const Classes = () => {
       </div>
 
       <ScrollView style={styles.calendarContainer}>
+        {(loading || !data) && <Spinner />}
+
         {currentDay === "" && (
           <div>
             <Text className="small-text">

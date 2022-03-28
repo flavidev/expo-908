@@ -64,9 +64,14 @@ export default function About() {
 const styles = {
   scrollview: {
     margin: "0 5%",
+    backgroundColor: "#fff",
+    borderRadius: "5px",
+    padding: "0 15px",
+    alignItems: "center",
+    justifyContent: "center",
   },
   description: {
-    fontSize: "1.25em",
-    color: "#fff",
+    fontSize: "1.1rem",
+    color: "#000",
   },
 };
