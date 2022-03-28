@@ -62,7 +62,10 @@ function Main(props) {
           <View className="container">
             <Image src={logo} style={styles.logo} />
             <Heading level={6} color={"#fff"}>
-              Selecione um campo no menu do rodapé {user.isAdmin && "Admin"}
+              Selecione um campo no menu do rodapé
+            </Heading>
+            <Heading level={6} color={"#fff"}>
+              {user.isAdmin && "Você é um administrador"}
             </Heading>
           </View>
         )}
