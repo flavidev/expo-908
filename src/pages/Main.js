@@ -66,7 +66,7 @@ function Main(props) {
             </Heading>
           </View>
         )}
-        {isTimeline && <Timeline />}
+        {isTimeline && <Timeline user={user} />}
         {isClasses && <Classes />}
         {isAccount && (
           <Account user={user} setUser={setUser} signOut={props.signOut} />

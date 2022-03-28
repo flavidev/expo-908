@@ -1,40 +1,114 @@
-import { ScrollView } from "@aws-amplify/ui-react";
-import React from "react";
+import { ScrollView, TextField, Button } from "@aws-amplify/ui-react";
+import React, { useState } from "react";
 
-const Timeline = () => {
+import { v4 as uuidv4 } from "uuid";
+
+import { Post } from "../components/Post";
+
+const Timeline = (props) => {
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState({
+    id: uuidv4(),
+    author: `${props.user.given_name} ${props.user.name}`,
+    content: "",
+    time: "",
+    date: "",
+  });
+
+  const handleDeletePost = (id) => {
+    const newPosts = posts.filter((post) => post.id !== id);
+    setPosts(newPosts);
+  };
+
+  const resetNewPost = () => {
+    setNewPost({ ...newPost, content: "", id: uuidv4() });
+  };
+
+  const handleSubmit = () => {
+    setNewPost({
+      ...newPost,
+    });
+    console.log("newPost time = " + newPost.time);
+    const newPosts = [...posts, newPost];
+    setPosts(newPosts);
+    resetNewPost();
+  };
+
   return (
     <div className="container">
-      <ScrollView
-        orientation="vertical"
-        height={"60vh"}
-        style={styles.scrollview}
-      >
-        <p style={styles.description}>
-          Não haverá aula nessa próxima quarta (1/1) devida à chuva!
-        </p>
-        <p style={styles.description}>
-          As camisas serão distribuídas por ordem de chegada
-        </p>
-        <p style={styles.description}>
-          O prazo para agendamento das aulas é de até 45 minutos antes do início
-          da mesma.
-        </p>
-      </ScrollView>
+      <div style={styles.scrollviewContainer}>
+        <ScrollView orientation="vertical" style={styles.scrollview}>
+          {posts
+            .slice(0)
+            .reverse()
+            .map((post) => (
+              <Post key={post.id} post={post} deletePost={handleDeletePost} />
+            ))}
+        </ScrollView>
+      </div>
+      <div style={styles.inputContainer}>
+        <TextField
+          placeholder="Escreva o seu texto aqui"
+          isMultiline={true}
+          style={styles.textfield}
+          value={newPost.content}
+          onChange={(event) =>
+            setNewPost({
+              ...newPost,
+              content: event.target.value,
+              time: new Date().toLocaleTimeString("pt-BR"),
+              date: new Date().toLocaleDateString("pt-BR"),
+            })
+          }
+        />
+        <Button
+          style={styles.button}
+          className="post-button"
+          onClick={handleSubmit}
+        >
+          Postar
+        </Button>
+      </div>
     </div>
   );
 };
 
 const styles = {
-  scrollview: {
-    margin: "0 5%",
+  scrollviewContainer: {
+    width: "100vw",
+    height: "60vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  description: {
+  scrollview: {
+    height: "100%",
+    width: "100vw",
+  },
+  inputContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100vw",
+    height: "10vh",
+  },
+  textfield: {
     borderRadius: "5px",
-    fontSize: "1.1rem",
+    boxShadow: "0px 0px 5px #000",
     backgroundColor: "#fff",
     color: "#000",
-    padding: "10px",
-    margin: "10",
+    width: "50vw",
+    height: "10vh",
+  },
+  button: {
+    backgroundColor: "#fff",
+    color: "#000",
+    borderRadius: "5px",
+    boxShadow: "0px 0px 5px #000",
+    width: "20vw",
   },
 };
+
 export default Timeline;
