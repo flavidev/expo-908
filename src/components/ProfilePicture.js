@@ -4,6 +4,8 @@ import { Storage } from "aws-amplify";
 import { Spinner } from "./Spinner";
 import defaultProfilePicture from "../assets/images/profile.png";
 
+import { checkImageURL } from "../utils/checkImageURL";
+
 export const ProfilePicture = (props) => {
   const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,29 +14,25 @@ export const ProfilePicture = (props) => {
     getSavedProfilePicture();
   }, []);
 
-  const key = props.user.sub + ".png";
+  const key = `${props.user.given_name}${props.user.name}-${props.user.sub}`;
+  const imageKitResizedImage = (width) =>
+    `https://ik.imagekit.io/fzwpyzjcl9f/${key}?tr=w-${width || 100}`;
 
   async function getSavedProfilePicture() {
-    const list = await Storage.list(key);
-    if (list.length > 0) {
-      await Storage.get(key, { download: true })
-        .then((result) => {
-          return URL.createObjectURL(result.Body);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then((url) => {
-          setIsLoading(false);
-          setProfilePicture(url);
-        });
-    } else {
-      setIsLoading(false);
-    }
+    await checkImageURL(imageKitResizedImage()).then((isValid) => {
+      if (isValid) {
+        setProfilePicture(imageKitResizedImage(100));
+        setIsLoading(false);
+      } else {
+        setProfilePicture(defaultProfilePicture);
+        setIsLoading(false);
+      }
+    });
   }
 
   async function handleFile(file) {
     setIsLoading(true);
+
     try {
       const list = await Storage.list(key);
       if (list.length > 0) {
