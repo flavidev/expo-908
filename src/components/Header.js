@@ -3,7 +3,7 @@ import { Text } from "@aws-amplify/ui-react";
 import { ProfilePicture } from "./ProfilePicture";
 
 function Header(props) {
-  const { email, given_name, name } = props.user;
+  const { email, given_name, name, isAdmin } = props.user;
 
   return (
     <div style={styles.container}>
@@ -14,9 +14,15 @@ function Header(props) {
           {given_name} {name}{" "}
         </Text>
         <Text className="small-text"> {email} </Text>
-        <Text className="small-text"> Status financeiro: ATIVO </Text>
-        <Text className="small-text"> Plano vigente: em breve</Text>
-        <Text className="small-text"> Créditos semanais: em breve </Text>
+        <Text className="small-text">
+          {" "}
+          Plano vigente: {isAdmin ? "Administrador" : "2x"}
+        </Text>
+
+        <Text className="small-text">
+          {" "}
+          Créditos restantes: {isAdmin ? "99" : "2"}{" "}
+        </Text>
       </div>
     </div>
   );

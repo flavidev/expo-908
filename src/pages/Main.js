@@ -64,13 +64,10 @@ function Main(props) {
             <Heading level={6} color={"#fff"}>
               Selecione um campo no menu do rodapé
             </Heading>
-            <Heading level={6} color={"#fff"}>
-              {user.isAdmin && "Você é um administrador"}
-            </Heading>
           </View>
         )}
         {isTimeline && <Timeline user={user} />}
-        {isClasses && <Classes />}
+        {isClasses && <Classes user={user} />}
         {isAccount && (
           <Account user={user} setUser={setUser} signOut={props.signOut} />
         )}

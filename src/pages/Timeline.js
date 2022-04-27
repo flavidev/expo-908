@@ -16,8 +16,10 @@ const Timeline = (props) => {
   });
 
   const handleDeletePost = (id) => {
-    const newPosts = posts.filter((post) => post.id !== id);
-    setPosts(newPosts);
+    if (window.confirm("Tem certeza que deseja deletar essa postagem?")) {
+      const newPosts = posts.filter((post) => post.id !== id);
+      setPosts(newPosts);
+    }
   };
 
   const resetNewPost = () => {
@@ -48,7 +50,7 @@ const Timeline = (props) => {
       </div>
       <div style={styles.inputContainer}>
         <TextField
-          placeholder="Escreva o seu texto aqui"
+          placeholder="Digite o texto da sua postagem"
           isMultiline={true}
           style={styles.textfield}
           value={newPost.content}
@@ -76,7 +78,7 @@ const Timeline = (props) => {
 const styles = {
   scrollviewContainer: {
     width: "100vw",
-    height: "60vh",
+    height: "55vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

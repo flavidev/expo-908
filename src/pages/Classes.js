@@ -1,22 +1,44 @@
-import React, { useState } from "react";
-import { useAxios } from "use-axios-client";
+import React, { useState, useEffect } from "react";
 import { Button, ScrollView, Text } from "@aws-amplify/ui-react";
+
+import AddClass from "./AddClass";
+import { getClasses } from "../api/API";
 
 import { ClassCard } from "../components/ClassCard";
 import { Spinner } from "../components/Spinner";
 
-const Classes = () => {
-  const [currentDay, setCurrentDay] = useState("");
+const Classes = (props) => {
+  const isAdmin = props.user.isAdmin;
 
-  const { data, loading } = useAxios({
-    url: "https://v2ph0dafi3.execute-api.sa-east-1.amazonaws.com/dev/eae/classes",
-    method: "GET",
-  });
+  const [currentDay, setCurrentDay] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAddClass, setIsAddClass] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    setIsLoading(true);
+    const response = await getClasses();
+    setData(response);
+    setIsLoading(false);
+  }
+
+  const handleOpenAddClass = () => {
+    setIsAddClass(true);
+  };
+
+  const handleCloseAddClass = () => {
+    setIsAddClass(false);
+  };
 
   return (
     <div style={styles.container}>
-      {(loading || !data) && <Spinner />}
-      {data && (
+      {isLoading && <Spinner />}
+
+      {data && !isLoading && !isAddClass && (
         <>
           <div style={styles.buttonContainer}>
             <Button
@@ -102,10 +124,26 @@ const Classes = () => {
                     />
                   );
                 })}
+                {isAdmin && (
+                  <Button
+                    style={styles.button}
+                    onClick={() => handleOpenAddClass()}
+                  >
+                    Criar Aula
+                  </Button>
+                )}
               </>
             )}
           </ScrollView>
         </>
+      )}
+
+      {isAddClass && (
+        <AddClass
+          user={props.user}
+          handleCloseAddClass={handleCloseAddClass}
+          currentDay={currentDay}
+        />
       )}
     </div>
   );
@@ -128,6 +166,9 @@ const styles = {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#fff",
   },
 
   weekCalendarMenu: {

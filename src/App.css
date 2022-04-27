@@ -107,6 +107,22 @@
   animation: spin 1s linear infinite;
 }
 
+.amplify-sliderfield {
+  color: #fff;
+  font-size: 0.1rem;
+  width: 75vw;
+}
+
+.amplify-sliderfield__range {
+  background-color: #503662;
+  border-color: #503662;
+}
+
+.amplify-label {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
 .bouncing {
   animation: bounce 1.5s infinite;
 }
