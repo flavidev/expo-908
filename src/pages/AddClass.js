@@ -89,6 +89,7 @@ const styles = {
   },
   goBackArrow: {
     width: "12.5vw",
+    maxWidth: "50px",
   },
 };
 
