@@ -47,8 +47,6 @@ const Account = (props) => {
             <Button style={styles.button} onClick={handleSetIsAbout}>
               Sobre
             </Button>
-          </div>
-          <div style={styles.buttonsRow}>
             <Button style={styles.button} onClick={handleSetIsContact}>
               Contato
             </Button>
@@ -103,7 +101,7 @@ const styles = {
     display: "flex",
     flex: 1,
     width: "100%",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-around",
     margin: "0 4rem",
     alignItems: "center",
@@ -115,10 +113,13 @@ const styles = {
     color: "#000",
     backgroundColor: "#fff",
     boxShadow: "0px 0px 5px #000",
-    width: "33.33vw",
-    height: "10vh",
+    height: "7.5vh",
+    width: "65vw",
     borderRadius: "5px",
     border: "1px solid #000",
+    fontSize: "1.25rem",
+    justifyContent: "center",
+    alignItems: "center",
   },
   goBackArrow: {
     margin: "0.5rem 0 0.5rem 0",

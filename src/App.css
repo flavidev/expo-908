@@ -27,6 +27,10 @@
   margin: 2rem;
   text-align: center;
 }
+.amplify-heading {
+  color: #fff;
+  font-size: 2rem;
+}
 
 .title-text-black {
   font-size: 5rem;

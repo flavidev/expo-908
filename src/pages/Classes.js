@@ -14,6 +14,7 @@ const Classes = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddClass, setIsAddClass] = useState(false);
   const [data, setData] = useState([]);
+  const weekDays = ["D", "2ª", "3ª", "4ª", "5ª", "6ª", "S"];
 
   useEffect(() => {
     getData();
@@ -21,9 +22,13 @@ const Classes = (props) => {
 
   async function getData() {
     setIsLoading(true);
-    const response = await getClasses();
-    setData(response);
-    setIsLoading(false);
+    try {
+      const response = await getClasses();
+      setData(response);
+      setIsLoading(false);
+    } catch (error) {
+      alert(error);
+    }
   }
 
   const handleOpenAddClass = () => {
@@ -41,55 +46,16 @@ const Classes = (props) => {
       {data && !isLoading && !isAddClass && (
         <>
           <div style={styles.buttonContainer}>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(0)}
-            >
-              D
-            </Button>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(1)}
-            >
-              2ª
-            </Button>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(2)}
-            >
-              3ª
-            </Button>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(3)}
-            >
-              4ª
-            </Button>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(4)}
-            >
-              5ª
-            </Button>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(5)}
-            >
-              6ª
-            </Button>
-            <Button
-              className="week-calendar-button"
-              isFullWidth={true}
-              onClick={() => setCurrentDay(6)}
-            >
-              S
-            </Button>
+            {weekDays.map((day, index) => (
+              <Button
+                key={index}
+                className="week-calendar-button"
+                isFullWidth={true}
+                onClick={() => setCurrentDay(index)}
+              >
+                {day}
+              </Button>
+            ))}
           </div>
 
           <ScrollView style={styles.calendarContainer}>

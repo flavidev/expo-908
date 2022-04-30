@@ -1,14 +1,13 @@
-import { ScrollView } from "@aws-amplify/ui-react";
+import { ScrollView, Heading } from "@aws-amplify/ui-react";
 import React from "react";
 
 export default function About() {
   return (
-    <div className="container">
-      <ScrollView
-        orientation="vertical"
-        height={"60vh"}
-        style={styles.scrollview}
-      >
+    <div style={styles.container}>
+      <div style={styles.headingContainer}>
+        <Heading level={4}>Sobre a Altinha</Heading>
+      </div>
+      <ScrollView orientation="vertical" style={styles.scrollview}>
         <p style={styles.description}>
           A Altinha é um Patrimônio Cultural Imaterial da cidade do Rio de
           Janeiro. Tem como propósito deixar a bola no ar pelo maior tempo
@@ -62,8 +61,24 @@ export default function About() {
 }
 
 const styles = {
+  container: {
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  headingContainer: {
+    flex: 1,
+    display: "flex",
+    maxWidth: "90vw",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   scrollview: {
-    margin: "0 5%",
+    flex: 10,
+    maxHeight: "55vh",
+    maxWidth: "90vw",
     backgroundColor: "#fff",
     borderRadius: "5px",
     padding: "0 15px",
