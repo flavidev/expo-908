@@ -1,36 +1,36 @@
 import { useState } from "react";
-import { Button, SliderField, Image } from "@aws-amplify/ui-react";
+import { Button, SliderField, Image, Heading } from "@aws-amplify/ui-react";
 
 import arrow from "../assets/images/arrow-back.png";
 
 function AddClass(props) {
   //const userId = props.user.sub;
-  const handleCloseAddClass = props.handleCloseAddClass;
-  const currentDay = props.currentDay;
-  const days = [
-    "Domingo",
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
-    "Sábado",
-  ];
+  const { handleCloseAddClass, days, currentDay } = props;
 
   const [newClass, setNewClass] = useState({
-    hour: "8",
+    type: 0,
+    hour: "08",
     minutes: "00",
     day: currentDay,
     duration: "60",
     spots: "12",
   });
 
+  const typeOfClass = ["Altinha", "Futevôlei"];
+
+  function handleChangeType(value) {
+    setNewClass({ ...newClass, type: value });
+  }
+
   function handleChangeHour(value) {
-    setNewClass({ ...newClass, hour: value });
+    setNewClass({ ...newClass, hour: value > 9 ? value : "0" + value });
   }
 
   function handleChangeMinutes(value) {
-    setNewClass({ ...newClass, minutes: value });
+    setNewClass({
+      ...newClass,
+      minutes: parseInt(value) > 9 ? value : "0" + value,
+    });
   }
 
   function handleChangeDuration(value) {
@@ -44,11 +44,11 @@ function AddClass(props) {
   const handleSubmit = () => {
     if (
       window.confirm(
-        `Deseja confirmar a aula de ${days[newClass.day].toLowerCase()} às ${
-          newClass.hour
-        }:${newClass.minutes} com ${newClass.duration} minutos de duração e ${
-          newClass.spots
-        } vagas?`
+        `Deseja confirmar ${typeOfClass[newClass.type].toLowerCase()} de ${days[
+          newClass.day
+        ].toLowerCase()} às ${newClass.hour}:${newClass.minutes} com ${
+          newClass.duration
+        } minutos de duração e ${newClass.spots} vagas?`
       )
     ) {
       handleCloseAddClass();
@@ -57,11 +57,23 @@ function AddClass(props) {
 
   return (
     <div className="container">
-      <div style={styles.titleContainer}>
-        <h2 style={styles.title}>{days[currentDay]}</h2>
+      <div style={styles.headerContainer}>
+        <Heading level={4} fontFamily="azonix">
+          {days[currentDay]}
+        </Heading>
       </div>
 
       <div style={styles.addClassContainer}>
+        <SliderField
+          label={typeOfClass[newClass.type]}
+          min={0}
+          max={1}
+          step={1}
+          value={newClass.type}
+          isValueHidden={true}
+          onChange={handleChangeType}
+        />
+
         <SliderField
           min={0}
           max={23}
@@ -118,15 +130,15 @@ const styles = {
     width: "100vw",
     height: "100%",
   },
-  titleContainer: {
+  headerContainer: {
     display: "flex",
-    flex: 1,
-    alignItems: "center",
+    width: "100%",
+    flexDirection: "row",
     justifyContent: "center",
-    width: "100vw",
-    height: "5vh",
-    backgroundColor: "#000",
+    alignItems: "center",
+    marginTop: "1rem",
   },
+
   title: {
     color: "#fff",
   },

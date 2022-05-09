@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, ScrollView, Text } from "@aws-amplify/ui-react";
+import { Button, Heading, ScrollView } from "@aws-amplify/ui-react";
 
 import AddClass from "./AddClass";
 import { getClasses } from "../api/API";
@@ -15,6 +15,15 @@ const Classes = (props) => {
   const [isAddClass, setIsAddClass] = useState(false);
   const [data, setData] = useState([]);
   const weekDays = ["D", "2ª", "3ª", "4ª", "5ª", "6ª", "S"];
+  const days = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
+  ];
 
   useEffect(() => {
     getData();
@@ -58,26 +67,20 @@ const Classes = (props) => {
             ))}
           </div>
 
-          <ScrollView style={styles.calendarContainer}>
-            {currentDay === "" && (
-              <div>
-                <Text className="small-text">
-                  Escolha o dia da semana no menu acima
-                </Text>
+          {currentDay === "" && (
+            <div className="container">
+              <Heading level={5}>Escolha o dia da semana no menu acima</Heading>
+            </div>
+          )}
+
+          {currentDay !== "" && (
+            <>
+              <div style={styles.headerContainer}>
+                <Heading level={5} fontFamily="azonix">
+                  {days[currentDay]}
+                </Heading>
               </div>
-            )}
-
-            {currentDay !== "" && (
-              <>
-                {data.body[currentDay].events.length < 1 && (
-                  <div style={styles.calendarItem}>
-                    <Text className="small-text-black">
-                      {" "}
-                      {data.body[currentDay].day} não tem aula
-                    </Text>
-                  </div>
-                )}
-
+              <ScrollView style={styles.calendarScrollView}>
                 {data.body[currentDay].events.map((item, index) => {
                   return (
                     <ClassCard
@@ -87,26 +90,35 @@ const Classes = (props) => {
                       starts={item.starts}
                       ends={item.ends}
                       availableSpots={item.availableSpots}
+                      isAdmin={isAdmin}
                     />
                   );
                 })}
-                {isAdmin && (
-                  <Button
-                    style={styles.button}
-                    onClick={() => handleOpenAddClass()}
-                  >
-                    Criar Aula
-                  </Button>
+
+                {data.body[currentDay].events.length < 1 && (
+                  <div className="container">
+                    <Heading level={4}>Hoje não tem aula</Heading>
+                  </div>
                 )}
-              </>
-            )}
-          </ScrollView>
+              </ScrollView>
+            </>
+          )}
+
+          {isAdmin && (
+            <Button
+              style={styles.submitButton}
+              onClick={() => handleOpenAddClass()}
+            >
+              Adicionar aula
+            </Button>
+          )}
         </>
       )}
 
       {isAddClass && (
         <AddClass
           user={props.user}
+          days={days}
           handleCloseAddClass={handleCloseAddClass}
           currentDay={currentDay}
         />
@@ -127,42 +139,30 @@ const styles = {
 
   buttonContainer: {
     display: "flex",
-    flex: 1,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-  },
-  button: {
-    backgroundColor: "#fff",
   },
 
-  weekCalendarMenu: {
+  headerContainer: {
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    width: "100vw",
-  },
-  calendarContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-around",
-    height: "100%",
     width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "1rem",
   },
-  calendarItem: {
+
+  calendarScrollView: {
     display: "flex",
-    height: "20%",
-    width: "80%",
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-around",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 5px #000",
+  },
+
+  submitButton: {
     backgroundColor: "#fff",
-    padding: "5px",
+    margin: "2.5vh 0",
   },
 };
 

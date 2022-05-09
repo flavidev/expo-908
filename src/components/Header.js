@@ -16,7 +16,7 @@ function Header(props) {
         <Text className="small-text"> {email} </Text>
         <Text className="small-text">
           {" "}
-          Plano vigente: {isAdmin ? "Administrador" : "2x"}
+          Plano: {isAdmin ? "Administrador" : "2x"}
         </Text>
 
         <Text className="small-text">

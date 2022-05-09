@@ -95,6 +95,7 @@ const styles = {
   headerContainer: {
     flex: 2,
     width: "100%",
+    height: "25vh",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#553565",
@@ -103,11 +104,13 @@ const styles = {
     flex: 10,
     alignItems: "center",
     justifyContent: "center",
+    height: "65vh",
   },
   bottomContainer: {
     flex: 1,
     backgroundColor: "#553565",
     width: "100%",
+    height: "10vh",
   },
   logo: {
     width: "50vw",
