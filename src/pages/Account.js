@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Button, Image } from "@aws-amplify/ui-react";
 
 import Plans from "./Plans";
 import About from "./About";
 import Contact from "./Contact";
 
-import arrow from "../assets/images/arrow-back.png";
+import { CircleButton } from "../components/CircleButton";
+
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { MdEditCalendar } from "react-icons/md";
+import { IoMdExit } from "react-icons/io";
+import { GiNotebook } from "react-icons/gi";
+import { GrContact } from "react-icons/gr";
 
 const Account = (props) => {
   const [isPlans, setIsPlans] = useState(false);
@@ -36,23 +41,34 @@ const Account = (props) => {
     setIsAbout(false);
   };
 
+  const handleSignOut = () => {
+    if (window.confirm("Deseja sair?")) {
+      props.signOut();
+    }
+  };
+
   return (
     <div style={styles.container}>
       {!isPlans && !IsContact && !isAbout && (
         <>
           <div style={styles.buttonsRow}>
-            <Button style={styles.button} onClick={handleSetIsPlan}>
-              Planos
-            </Button>
-            <Button style={styles.button} onClick={handleSetIsAbout}>
-              Sobre
-            </Button>
-            <Button style={styles.button} onClick={handleSetIsContact}>
-              Contato
-            </Button>
-            <Button style={styles.button} onClick={props.signOut}>
-              Sair
-            </Button>
+            <CircleButton onClick={handleSetIsPlan} text="Planos">
+              <MdEditCalendar style={styles.icon} />
+            </CircleButton>
+
+            <CircleButton onClick={handleSetIsContact} text="Contato">
+              <GrContact style={styles.icon} />
+            </CircleButton>
+          </div>
+
+          <div style={styles.buttonsRow}>
+            <CircleButton onClick={handleSetIsAbout} text="Sobre">
+              <GiNotebook style={styles.icon} />
+            </CircleButton>
+
+            <CircleButton onClick={handleSignOut} text="Sair">
+              <IoMdExit style={styles.icon} />
+            </CircleButton>
           </div>
         </>
       )}
@@ -82,7 +98,11 @@ const Account = (props) => {
       )}
 
       {(IsContact || isPlans || isAbout) && (
-        <Image src={arrow} style={styles.goBackArrow} onClick={handleGoBack} />
+        <RiArrowGoBackFill
+          style={styles.icon}
+          color="#fff"
+          onClick={handleGoBack}
+        />
       )}
     </div>
   );
@@ -101,7 +121,7 @@ const styles = {
     display: "flex",
     flex: 1,
     width: "100%",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "space-around",
     margin: "0 4rem",
     alignItems: "center",
@@ -109,22 +129,10 @@ const styles = {
   areaContainer: {
     height: "100%",
   },
-  button: {
-    color: "#000",
-    backgroundColor: "#fff",
-    boxShadow: "0px 0px 5px #000",
-    height: "7.5vh",
-    width: "65vw",
-    borderRadius: "5px",
-    border: "1px solid #000",
-    fontSize: "1.25rem",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  goBackArrow: {
-    margin: "0.5rem 0 0.5rem 0",
-    width: "15vw",
-    maxWidth: "50px",
+
+  icon: {
+    margin: "0.5rem",
+    fontSize: "3rem",
   },
 };
 

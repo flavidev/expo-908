@@ -5,7 +5,9 @@ export default function About() {
   return (
     <div style={styles.container}>
       <div style={styles.headingContainer}>
-        <Heading level={4}>Sobre a Altinha</Heading>
+        <Heading level={4} fontFamily="azonix">
+          A Altinha
+        </Heading>
       </div>
       <ScrollView orientation="vertical" style={styles.scrollview}>
         <p style={styles.description}>
@@ -84,6 +86,7 @@ const styles = {
     padding: "0 15px",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: "2vh",
   },
   description: {
     fontSize: "1.1rem",

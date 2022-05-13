@@ -95,10 +95,11 @@ const styles = {
     margin: "0.5rem",
     borderRadius: "50%",
     border: "1px solid white",
-    maxHeight: "200px",
-    maxWidth: "200px",
     height: "30vw",
+    maxHeight: "15vh",
     width: "25vw",
+    maxWidth: "15vh",
+
     alignItems: "center",
     justifyContent: "center",
   },

@@ -10,13 +10,12 @@ import {
 
 export const ClassCard = (props) => {
   const event = {
-    title: props.title,
+    type: props.type,
     day: props.day,
     starts: props.starts,
-    ends: props.ends,
-    availableSpots: props.availableSpots,
+    duration: props.duration,
+    spots: props.spots,
     isAdmin: props.isAdmin,
-    type: "Futevôlei",
   };
 
   return (
@@ -26,12 +25,12 @@ export const ClassCard = (props) => {
           <Flex alignItems="center" justifyContent="center" width="100%">
             <Badge>{event.type}</Badge>
             <Text>
-              {event.starts} {event.ends}
+              {event.starts} {event.duration}
             </Text>
             <Text textAlign="center">
               Vagas{" "}
               <Badge size="small" margin="0.5rem 0">
-                {event.availableSpots}
+                {event.spots}
               </Badge>
             </Text>
           </Flex>
@@ -74,7 +73,7 @@ const styles = {
     justifyContent: "center",
   },
   icon: {
-    fontSize: "3rem",
+    fontSize: "2.5rem",
     cursor: "pointer",
   },
 };

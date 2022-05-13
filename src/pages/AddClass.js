@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Button, SliderField, Image, Heading } from "@aws-amplify/ui-react";
+import { SliderField, Heading } from "@aws-amplify/ui-react";
 
-import arrow from "../assets/images/arrow-back.png";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { GiConfirmed } from "react-icons/gi";
 
 function AddClass(props) {
   //const userId = props.user.sub;
@@ -65,9 +66,10 @@ function AddClass(props) {
 
       <div style={styles.addClassContainer}>
         <SliderField
+          filledTrackColor={"#fff"}
           label={typeOfClass[newClass.type]}
           min={0}
-          max={1}
+          max={typeOfClass.length - 1}
           step={1}
           value={newClass.type}
           isValueHidden={true}
@@ -108,14 +110,8 @@ function AddClass(props) {
         />
       </div>
       <div style={styles.bottomContainer}>
-        <Image
-          src={arrow}
-          style={styles.goBackArrow}
-          onClick={handleCloseAddClass}
-        />
-        <Button style={styles.button} onClick={handleSubmit}>
-          Confirmar
-        </Button>
+        <RiArrowGoBackFill onClick={handleCloseAddClass} style={styles.icon} />
+        <GiConfirmed onClick={handleSubmit} style={styles.icon} />
       </div>
     </div>
   );
@@ -150,9 +146,7 @@ const styles = {
     justifyContent: "space-around",
     alignItems: "center",
   },
-  button: {
-    backgroundColor: "#fff",
-  },
+
   bottomContainer: {
     display: "flex",
     flex: 1,
@@ -160,10 +154,23 @@ const styles = {
     width: "100%",
     justifyContent: "space-around",
     alignItems: "center",
+    marginBottom: "1rem",
   },
-  goBackArrow: {
-    width: "12.5vw",
-    maxWidth: "50px",
+  buttonIcon: {
+    color: "#000",
+    flexDirection: "column",
+    fontSize: "1.25rem",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    fontSize: "1.25rem",
+    fontFamily: "azonix",
+    color: "#fff",
+  },
+  icon: {
+    fontSize: "2.5rem",
+    color: "#fff",
   },
 };
 

@@ -1,5 +1,8 @@
 import React from "react";
-import { Button } from "@aws-amplify/ui-react";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { MdEmail } from "react-icons/md";
+
+import { CircleButton } from "../components/CircleButton";
 
 function Contact(props) {
   const user = props.user;
@@ -20,12 +23,13 @@ function Contact(props) {
 
   return (
     <div style={styles.container}>
-      <Button style={styles.button} onClick={handleOpenWhatsApp}>
-        WhatsApp
-      </Button>
-      <Button style={styles.button} onClick={handleSendEmail}>
-        Email
-      </Button>
+      <CircleButton onClick={handleOpenWhatsApp} text="WhatsApp">
+        <IoLogoWhatsapp style={styles.icon} color="#075e54" />
+      </CircleButton>
+
+      <CircleButton onClick={handleSendEmail} text="Email">
+        <MdEmail style={styles.icon} color="#f00" />
+      </CircleButton>
     </div>
   );
 }
@@ -42,16 +46,7 @@ const styles = {
     height: "100%",
   },
 
-  button: {
-    color: "#000",
-    backgroundColor: "#fff",
-    boxShadow: "0px 0px 5px #000",
-    height: "7.5vh",
-    width: "70vw",
-    borderRadius: "5px",
-    border: "1px solid #000",
-    fontSize: "1.25rem",
-    justifyContent: "center",
-    alignItems: "center",
+  icon: {
+    fontSize: "3.5rem",
   },
 };

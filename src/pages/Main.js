@@ -93,15 +93,16 @@ const styles = {
     justifyContent: "center",
   },
   headerContainer: {
-    flex: 2,
+    flex: 1,
     width: "100%",
     height: "25vh",
+    maxHeight: "250px",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#553565",
   },
   bodyContainer: {
-    flex: 10,
+    flex: 5,
     alignItems: "center",
     justifyContent: "center",
     height: "65vh",
@@ -110,6 +111,7 @@ const styles = {
     flex: 1,
     backgroundColor: "#553565",
     width: "100%",
+    maxHeight: "100px",
     height: "10vh",
   },
   logo: {

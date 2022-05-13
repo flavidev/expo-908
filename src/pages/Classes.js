@@ -6,6 +6,7 @@ import { getClasses } from "../api/API";
 
 import { ClassCard } from "../components/ClassCard";
 import { Spinner } from "../components/Spinner";
+import { MdOutlineAddToPhotos } from "react-icons/md";
 
 const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
@@ -81,21 +82,22 @@ const Classes = (props) => {
                 </Heading>
               </div>
               <ScrollView style={styles.calendarScrollView}>
-                {data.body[currentDay].events.map((item, index) => {
-                  return (
+                {data.body
+                  .filter((element) => element.day == currentDay)
+                  .map((item, index) => (
                     <ClassCard
                       key={index}
-                      title={item.title}
-                      day={data.body[currentDay].day}
+                      type={item.type}
+                      day={item.day}
                       starts={item.starts}
-                      ends={item.ends}
-                      availableSpots={item.availableSpots}
+                      duration={item.duration}
+                      spots={item.spots}
                       isAdmin={isAdmin}
                     />
-                  );
-                })}
+                  ))}
 
-                {data.body[currentDay].events.length < 1 && (
+                {data.body.filter((element) => element.day == currentDay)
+                  .length === 0 && (
                   <div className="container">
                     <Heading level={4}>Hoje não tem aula</Heading>
                   </div>
@@ -104,13 +106,11 @@ const Classes = (props) => {
             </>
           )}
 
-          {isAdmin && (
-            <Button
-              style={styles.submitButton}
+          {isAdmin && currentDay && (
+            <MdOutlineAddToPhotos
+              style={styles.icon}
               onClick={() => handleOpenAddClass()}
-            >
-              Adicionar aula
-            </Button>
+            />
           )}
         </>
       )}
@@ -159,10 +159,10 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
   },
-
-  submitButton: {
-    backgroundColor: "#fff",
-    margin: "2.5vh 0",
+  icon: {
+    fontSize: "2.5rem",
+    margin: "1rem",
+    color: "#fff",
   },
 };
 

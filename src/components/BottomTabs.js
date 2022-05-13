@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  IconCalendarToday,
-  IconPerson,
-  IconSportsSoccer,
-} from "@aws-amplify/ui-react";
+import { MdCalendarToday, MdPerson, MdSportsSoccer } from "react-icons/md";
+
 import { Button } from "@aws-amplify/ui-react";
 
 const BottomTabs = (props) => {
@@ -15,7 +12,7 @@ const BottomTabs = (props) => {
         style={styles.tabContainer}
         onClick={props.setIsTimeline}
       >
-        <IconCalendarToday style={styles.icon} />
+        <MdCalendarToday style={styles.icon} />
         Mural
       </Button>
 
@@ -25,7 +22,7 @@ const BottomTabs = (props) => {
         style={styles.tabContainer}
         onClick={props.setIsClasses}
       >
-        <IconSportsSoccer style={styles.icon} />
+        <MdSportsSoccer style={styles.icon} />
         Aulas
       </Button>
       <Button
@@ -34,7 +31,7 @@ const BottomTabs = (props) => {
         style={styles.tabContainer}
         onClick={props.setIsAccount}
       >
-        <IconPerson style={styles.icon} />
+        <MdPerson style={styles.icon} />
         Conta
       </Button>
     </div>
