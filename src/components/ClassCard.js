@@ -8,14 +8,31 @@ import {
   IconLogin,
 } from "@aws-amplify/ui-react";
 
+import { deleteClass } from "../api/API";
+
 export const ClassCard = (props) => {
   const event = {
+    id: props.id,
     type: props.type,
     day: props.day,
-    starts: props.starts,
+    hour: props.hour,
+    minutes: props.minutes,
     duration: props.duration,
     spots: props.spots,
     isAdmin: props.isAdmin,
+  };
+
+  const handleDeleteClass = async () => {
+    if (
+      window.confirm(
+        `Confirma a remoção da aula de ${event.type.toLowerCase()} que começaria às ${
+          event.hour
+        }:${event.minutes}`
+      )
+    ) {
+      await deleteClass({ id: event.id });
+      await props.refreshClasses();
+    }
   };
 
   return (
@@ -25,7 +42,7 @@ export const ClassCard = (props) => {
           <Flex alignItems="center" justifyContent="center" width="100%">
             <Badge>{event.type}</Badge>
             <Text>
-              {event.starts} {event.duration}
+              {event.hour}:{event.minutes} {event.duration}
             </Text>
             <Text textAlign="center">
               Vagas{" "}
@@ -44,7 +61,7 @@ export const ClassCard = (props) => {
               <IconDeleteForever
                 style={styles.icon}
                 color="red"
-                onClick={() => alert("Aula removida!")}
+                onClick={() => handleDeleteClass()}
               />
             )}
           </Flex>

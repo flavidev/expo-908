@@ -11,12 +11,12 @@ export const getClasses = async () => {
 
 export const createClass = async (data) => {
   const response = await api.post("classes", data);
-  return response.data;
+  return response;
 };
 
-export const deleteClass = async (id) => {
-  const response = await api.delete(`classes/${id}`);
-  return response.data;
+export const deleteClass = async (data) => {
+  const response = await api.delete("classes", { data });
+  return response;
 };
 
 export const updateClass = async (id, data) => {

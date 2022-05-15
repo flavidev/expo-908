@@ -6,12 +6,16 @@ import { getClasses } from "../api/API";
 
 import { ClassCard } from "../components/ClassCard";
 import { Spinner } from "../components/Spinner";
+import { CircleButton } from "../components/CircleButton";
 import { MdOutlineAddToPhotos } from "react-icons/md";
+import { ImPointUp } from "react-icons/im";
+import { FaGlassCheers } from "react-icons/fa";
 
 const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
 
   const [currentDay, setCurrentDay] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
   const [isAddClass, setIsAddClass] = useState(false);
   const [data, setData] = useState([]);
@@ -61,7 +65,7 @@ const Classes = (props) => {
                 key={index}
                 className="week-calendar-button"
                 isFullWidth={true}
-                onClick={() => setCurrentDay(index)}
+                onClick={() => (getData(), setCurrentDay(index))}
               >
                 {day}
               </Button>
@@ -70,7 +74,9 @@ const Classes = (props) => {
 
           {currentDay === "" && (
             <div className="container">
-              <Heading level={5}>Escolha o dia da semana no menu acima</Heading>
+              <CircleButton text="Selecione um dia">
+                <ImPointUp style={{ fontSize: "3.5rem" }} />
+              </CircleButton>
             </div>
           )}
 
@@ -87,19 +93,24 @@ const Classes = (props) => {
                   .map((item, index) => (
                     <ClassCard
                       key={index}
+                      id={item.classesId}
                       type={item.type}
                       day={item.day}
-                      starts={item.starts}
+                      hour={item.hour}
+                      minutes={item.minutes}
                       duration={item.duration}
                       spots={item.spots}
                       isAdmin={isAdmin}
+                      refreshClasses={getData}
                     />
                   ))}
 
                 {data.body.filter((element) => element.day == currentDay)
                   .length === 0 && (
                   <div className="container">
-                    <Heading level={4}>Hoje não tem aula</Heading>
+                    <CircleButton text="Dia de folga">
+                      <FaGlassCheers style={{ fontSize: "3.5rem" }} />
+                    </CircleButton>
                   </div>
                 )}
               </ScrollView>
@@ -121,6 +132,7 @@ const Classes = (props) => {
           days={days}
           handleCloseAddClass={handleCloseAddClass}
           currentDay={currentDay}
+          refreshClasses={getData}
         />
       )}
     </div>

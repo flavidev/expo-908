@@ -1,15 +1,22 @@
 import { useState } from "react";
-import { SliderField, Heading } from "@aws-amplify/ui-react";
+import { createClass } from "../api/API";
 
+import { SliderField, Heading } from "@aws-amplify/ui-react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
 
+import { v4 } from "uuid";
+
 function AddClass(props) {
   //const userId = props.user.sub;
+
+  const refreshClasses = props.refreshClasses;
+
   const { handleCloseAddClass, days, currentDay } = props;
 
   const [newClass, setNewClass] = useState({
-    type: 0,
+    classesId: v4(),
+    type: "Altinha",
     hour: "08",
     minutes: "00",
     day: currentDay,
@@ -17,20 +24,25 @@ function AddClass(props) {
     spots: "12",
   });
 
+  //const [isLoading, setIsLoading] = useState(false);
+
   const typeOfClass = ["Altinha", "Futevôlei"];
 
   function handleChangeType(value) {
-    setNewClass({ ...newClass, type: value });
+    setNewClass({ ...newClass, type: typeOfClass[value] });
   }
 
   function handleChangeHour(value) {
-    setNewClass({ ...newClass, hour: value > 9 ? value : "0" + value });
+    setNewClass({
+      ...newClass,
+      hour: parseInt(value) < 10 ? `0${value}` : value,
+    });
   }
 
   function handleChangeMinutes(value) {
     setNewClass({
       ...newClass,
-      minutes: parseInt(value) > 9 ? value : "0" + value,
+      minutes: parseInt(value) < 10 ? `0${value}` : value,
     });
   }
 
@@ -42,17 +54,19 @@ function AddClass(props) {
     setNewClass({ ...newClass, spots: value });
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       window.confirm(
-        `Deseja confirmar ${typeOfClass[newClass.type].toLowerCase()} de ${days[
+        `Deseja confirmar ${newClass.type.toLowerCase()} de ${days[
           newClass.day
         ].toLowerCase()} às ${newClass.hour}:${newClass.minutes} com ${
           newClass.duration
         } minutos de duração e ${newClass.spots} vagas?`
       )
     ) {
+      await createClass(newClass);
       handleCloseAddClass();
+      await refreshClasses();
     }
   };
 
@@ -67,11 +81,11 @@ function AddClass(props) {
       <div style={styles.addClassContainer}>
         <SliderField
           filledTrackColor={"#fff"}
-          label={typeOfClass[newClass.type]}
+          label={newClass.type}
           min={0}
           max={typeOfClass.length - 1}
           step={1}
-          value={newClass.type}
+          value={typeOfClass.indexOf(newClass.type)}
           isValueHidden={true}
           onChange={handleChangeType}
         />
