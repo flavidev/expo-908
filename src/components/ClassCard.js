@@ -1,14 +1,9 @@
-import {
-  Card,
-  View,
-  Flex,
-  Badge,
-  Text,
-  IconDeleteForever,
-  IconLogin,
-} from "@aws-amplify/ui-react";
-
 import { deleteClass } from "../api/API";
+
+import { AiFillMinusCircle } from "react-icons/ai";
+import { CircleButton } from "./CircleButton";
+import { GiSoccerKick, GiFishingNet } from "react-icons/gi";
+import { Heading } from "@aws-amplify/ui-react";
 
 export const ClassCard = (props) => {
   const event = {
@@ -20,6 +15,7 @@ export const ClassCard = (props) => {
     duration: props.duration,
     spots: props.spots,
     isAdmin: props.isAdmin,
+    //    confirmed: props.confirmed
   };
 
   const handleDeleteClass = async () => {
@@ -36,61 +32,94 @@ export const ClassCard = (props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Card style={styles.card}>
-        <Flex justifyContent="space-around">
-          <Flex alignItems="center" justifyContent="center" width="100%">
-            <Badge>{event.type}</Badge>
-            <Text>
-              {event.hour}:{event.minutes} {event.duration}
-            </Text>
-            <Text textAlign="center">
-              Vagas{" "}
-              <Badge size="small" margin="0.5rem 0">
-                {event.spots}
-              </Badge>
-            </Text>
-          </Flex>
-          <Flex alignItems="center">
-            <IconLogin
-              onClick={() => alert("Em breve 💜")}
-              style={styles.icon}
-              color="green"
-            />
-            {event.isAdmin && (
-              <IconDeleteForever
-                style={styles.icon}
-                color="red"
-                onClick={() => handleDeleteClass()}
-              />
+    <div style={styles.container}>
+      <div style={styles.cardRow}>
+        <div style={styles.circleButtonContainer}>
+          <CircleButton text={event.type} size="small">
+            {event.type == "Altinha" ? (
+              <GiSoccerKick style={styles.icon} />
+            ) : (
+              <GiFishingNet style={styles.icon} />
             )}
-          </Flex>
-        </Flex>
-      </Card>
-    </View>
+          </CircleButton>
+        </div>
+
+        <div style={styles.headerContainer}>
+          <Heading level={3} style={styles.headerText}>
+            {props.hour}:{props.minutes}
+          </Heading>
+          <Heading level={6} style={styles.headerText}>
+            {props.spots} vagas
+          </Heading>
+        </div>
+
+        {event.isAdmin && (
+          <div
+            style={{
+              display: "flex",
+              flex: 0.5,
+              justifyContent: "center",
+            }}
+          >
+            <AiFillMinusCircle
+              style={styles.iconBlack}
+              onClick={() => handleDeleteClass()}
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
 const styles = {
   container: {
     display: "flex",
-    backgroundColor: "#fff",
-    width: "90%",
-    height: "22.5%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: "5px",
+    width: "90vw",
     border: "1px solid #000",
+    backgroundColor: "#fff",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "5px",
     margin: "1rem",
   },
-  card: {
-    width: "90vw",
-    height: "100%",
+  cardRow: {
     display: "flex",
+    flex: 1,
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "1rem 0",
+  },
+  headerContainer: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    alignItems: "center",
+  },
+  circleButtonContainer: {
+    display: "flex",
+    flex: 1,
+    alignItems: "center",
     justifyContent: "center",
   },
+
+  headerText: {
+    fontFamily: "Azonix",
+    color: "#000",
+    margin: "0.15rem",
+  },
+
   icon: {
-    fontSize: "2.5rem",
+    fontSize: "3rem",
     cursor: "pointer",
+    color: "#fff",
+  },
+  iconBlack: {
+    fontSize: "2rem",
+    cursor: "pointer",
+    color: "#a00",
   },
 };

@@ -15,7 +15,6 @@ const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
 
   const [currentDay, setCurrentDay] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
   const [isAddClass, setIsAddClass] = useState(false);
   const [data, setData] = useState([]);
@@ -85,6 +84,17 @@ const Classes = (props) => {
               <div style={styles.headerContainer}>
                 <Heading level={5} fontFamily="azonix">
                   {days[currentDay]}
+                  {data.body.filter((element) => element.day == currentDay)
+                    .length > 0 &&
+                    " tem " +
+                      data.body.filter((element) => element.day == currentDay)
+                        .length +
+                      ` aula${
+                        data.body.filter((element) => element.day == currentDay)
+                          .length > 1
+                          ? "s"
+                          : ""
+                      }`}
                 </Heading>
               </div>
               <ScrollView style={styles.calendarScrollView}>
@@ -109,7 +119,10 @@ const Classes = (props) => {
                   .length === 0 && (
                   <div className="container">
                     <CircleButton text="Dia de folga">
-                      <FaGlassCheers style={{ fontSize: "3.5rem" }} />
+                      <FaGlassCheers
+                        style={{ fontSize: "3.5rem" }}
+                        onClick={() => alert("Não há aulas para este dia")}
+                      />
                     </CircleButton>
                   </div>
                 )}
@@ -117,7 +130,7 @@ const Classes = (props) => {
             </>
           )}
 
-          {isAdmin && currentDay && (
+          {isAdmin && currentDay !== "" && (
             <MdOutlineAddToPhotos
               style={styles.icon}
               onClick={() => handleOpenAddClass()}
