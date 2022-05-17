@@ -1,5 +1,7 @@
-import { ScrollView, TextField, Button } from "@aws-amplify/ui-react";
 import React, { useState } from "react";
+import { ScrollView, TextField } from "@aws-amplify/ui-react";
+import { CircleButton } from "../components/CircleButton";
+import { BiMailSend } from "react-icons/bi";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -63,13 +65,15 @@ const Timeline = (props) => {
             })
           }
         />
-        <Button
+        <CircleButton
           style={styles.button}
           className="post-button"
           onClick={handleSubmit}
+          size="small"
+          theme="light"
         >
-          Postar
-        </Button>
+          <BiMailSend style={styles.icon} />
+        </CircleButton>
       </div>
     </div>
   );
@@ -104,12 +108,10 @@ const styles = {
     width: "50vw",
     height: "10vh",
   },
-  button: {
-    backgroundColor: "#fff",
+  icon: {
     color: "#000",
     borderRadius: "5px",
-    boxShadow: "0px 0px 5px #000",
-    width: "20vw",
+    fontSize: "2.5rem",
   },
 };
 

@@ -29,15 +29,17 @@ export const CircleButton = (props) => {
       >
         {props.children}
       </Flex>
-      <Text
-        style={{
-          fontFamily: "Azonix",
-          fontSize: size === "big" ? "1.5rem" : "1rem",
-          color: theme === "light" ? "#fff" : "#000",
-        }}
-      >
-        {text}
-      </Text>
+      {text && (
+        <Text
+          style={{
+            fontFamily: "Azonix",
+            fontSize: size === "big" ? "1.5rem" : "1rem",
+            color: theme === "light" ? "#fff" : "#000",
+          }}
+        >
+          {text}
+        </Text>
+      )}
     </Flex>
   );
 };

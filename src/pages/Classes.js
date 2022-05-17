@@ -185,8 +185,8 @@ const styles = {
 
   calendarScrollView: {
     display: "flex",
-    flex: 1,
-    width: "100%",
+    height: "100%",
+    width: "95%",
     flexDirection: "column",
     alignItems: "center",
   },
