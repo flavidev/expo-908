@@ -1,5 +1,6 @@
 import React from "react";
-import { MdCalendarToday, MdPerson, MdSportsSoccer } from "react-icons/md";
+import { MdPerson, MdSportsSoccer } from "react-icons/md";
+import { CgNotes } from "react-icons/cg";
 
 import { Button } from "@aws-amplify/ui-react";
 
@@ -12,7 +13,7 @@ const BottomTabs = (props) => {
         style={styles.tabContainer}
         onClick={props.setIsTimeline}
       >
-        <MdCalendarToday style={styles.icon} />
+        <CgNotes style={styles.icon} />
         Mural
       </Button>
 
@@ -51,7 +52,8 @@ const styles = {
     flexDirection: "column",
   },
   icon: {
-    fontSize: "1.5rem",
+    fontSize: "2.5rem",
+    margin: "0.5rem",
   },
 };
 

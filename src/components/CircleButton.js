@@ -1,23 +1,40 @@
-import { Flex, Button, Text } from "@aws-amplify/ui-react";
+import { Flex, Text } from "@aws-amplify/ui-react";
 
 export const CircleButton = (props) => {
   const text = props.text;
   const size = props.size ? props.size : "big";
+  const theme = props.theme ? props.theme : "light";
 
   const handleClick = () => {
     props.onClick();
   };
 
   return (
-    <Flex style={styles.buttonIcon}>
-      <Button
-        style={size === "big" ? styles.buttonBig : styles.buttonSmall}
+    <Flex
+      style={theme === "light" ? styles.buttonIconLight : styles.buttonIconDark}
+    >
+      <Flex
+        style={{
+          height: size === "big" ? "15vh" : "7.5vh",
+          width: size === "big" ? "15vh" : "7.5vh",
+          backgroundColor: theme === "light" ? "#fff" : "#000",
+          borderRadius: "50%",
+          border: theme === "light" ? "1px solid #000" : "1px solid #fff",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+        }}
         onClick={handleClick}
       >
         {props.children}
-      </Button>
+      </Flex>
       <Text
-        style={size === "big" ? styles.buttonTextWhite : styles.buttonTextBlack}
+        style={{
+          fontFamily: "Azonix",
+          fontSize: size === "big" ? "1.5rem" : "1rem",
+          color: theme === "light" ? "#fff" : "#000",
+        }}
       >
         {text}
       </Text>
@@ -26,18 +43,19 @@ export const CircleButton = (props) => {
 };
 
 const styles = {
-  buttonBig: {
+  buttonIconLight: {
     color: "#000",
-    backgroundColor: "#fff",
-    boxShadow: "0px 0px 5px #000",
-    height: "15vh",
-    width: "15vh",
-    borderRadius: "50%",
-    border: "1px solid #000",
-    fontSize: "1.25rem",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
+  buttonIconDark: {
+    color: "#fff",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  /*
   buttonSmall: {
     color: "#fff",
     backgroundColor: "#000",
@@ -46,26 +64,18 @@ const styles = {
     width: "7.5vh",
     borderRadius: "50%",
     border: "1px solid #000",
-    fontSize: "1.25rem",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  buttonIcon: {
-    color: "#fff",
-    flexDirection: "column",
-    fontSize: "1.25rem",
+    fontSize: "1.5rem",
     justifyContent: "center",
     alignItems: "center",
   },
   buttonTextWhite: {
-    fontSize: "1.25rem",
+    fontSize: "1rem",
     fontFamily: "azonix",
     color: "#fff",
   },
   buttonTextBlack: {
-    fontSize: "1.25rem",
+    fontSize: "1rem",
     fontFamily: "azonix",
     color: "#000",
-  },
+  },*/
 };

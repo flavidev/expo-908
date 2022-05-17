@@ -94,12 +94,11 @@ const styles = {
     flex: 1,
     margin: "0.5rem",
     borderRadius: "50%",
-    border: "1px solid white",
+    border: "0.5px solid #000",
     height: "30vw",
     maxHeight: "15vh",
     width: "25vw",
     maxWidth: "15vh",
-
     alignItems: "center",
     justifyContent: "center",
   },

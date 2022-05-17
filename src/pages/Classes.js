@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Button, Heading, ScrollView } from "@aws-amplify/ui-react";
-
-import AddClass from "./AddClass";
 import { getClasses } from "../api/API";
 
-import { ClassCard } from "../components/ClassCard";
+import AddClass from "./AddClass";
+
+import { Heading, ScrollView } from "@aws-amplify/ui-react";
 import { Spinner } from "../components/Spinner";
+import { ClassCard } from "../components/ClassCard";
 import { CircleButton } from "../components/CircleButton";
-import { MdOutlineAddToPhotos } from "react-icons/md";
+import { RoundDayButton } from "../components/RoundDayButton";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { ImPointUp } from "react-icons/im";
-import { FaGlassCheers } from "react-icons/fa";
+import { GiNightSleep } from "react-icons/gi";
 
 const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
@@ -18,7 +19,7 @@ const Classes = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddClass, setIsAddClass] = useState(false);
   const [data, setData] = useState([]);
-  const weekDays = ["D", "2ª", "3ª", "4ª", "5ª", "6ª", "S"];
+  const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
   const days = [
     "Domingo",
     "Segunda-feira",
@@ -60,20 +61,23 @@ const Classes = (props) => {
         <>
           <div style={styles.buttonContainer}>
             {weekDays.map((day, index) => (
-              <Button
+              <RoundDayButton
+                size="small"
+                text={day}
                 key={index}
                 className="week-calendar-button"
                 isFullWidth={true}
                 onClick={() => (getData(), setCurrentDay(index))}
-              >
-                {day}
-              </Button>
+              ></RoundDayButton>
             ))}
           </div>
 
           {currentDay === "" && (
             <div className="container">
-              <CircleButton text="Selecione um dia">
+              <CircleButton
+                text="Selecione um dia"
+                onClick={() => alert("Escolha um dia da semana no menu acima")}
+              >
                 <ImPointUp style={{ fontSize: "3.5rem" }} />
               </CircleButton>
             </div>
@@ -100,6 +104,7 @@ const Classes = (props) => {
               <ScrollView style={styles.calendarScrollView}>
                 {data.body
                   .filter((element) => element.day == currentDay)
+                  .sort((a, b) => a.hour - b.hour)
                   .map((item, index) => (
                     <ClassCard
                       key={index}
@@ -118,11 +123,11 @@ const Classes = (props) => {
                 {data.body.filter((element) => element.day == currentDay)
                   .length === 0 && (
                   <div className="container">
-                    <CircleButton text="Dia de folga">
-                      <FaGlassCheers
-                        style={{ fontSize: "3.5rem" }}
-                        onClick={() => alert("Não há aulas para este dia")}
-                      />
+                    <CircleButton
+                      text="Dia de folga"
+                      onClick={() => alert("Não há aulas para este dia")}
+                    >
+                      <GiNightSleep style={{ fontSize: "3.5rem" }} />
                     </CircleButton>
                   </div>
                 )}
@@ -131,7 +136,7 @@ const Classes = (props) => {
           )}
 
           {isAdmin && currentDay !== "" && (
-            <MdOutlineAddToPhotos
+            <AiFillPlusCircle
               style={styles.icon}
               onClick={() => handleOpenAddClass()}
             />
@@ -166,7 +171,7 @@ const styles = {
     display: "flex",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
 
   headerContainer: {
@@ -181,6 +186,7 @@ const styles = {
   calendarScrollView: {
     display: "flex",
     flex: 1,
+    width: "100%",
     flexDirection: "column",
     alignItems: "center",
   },

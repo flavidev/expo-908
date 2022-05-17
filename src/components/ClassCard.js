@@ -1,8 +1,9 @@
 import { deleteClass } from "../api/API";
 
-import { AiFillMinusCircle } from "react-icons/ai";
+import { TiDelete } from "react-icons/ti";
 import { CircleButton } from "./CircleButton";
-import { GiSoccerKick, GiFishingNet } from "react-icons/gi";
+import { GiSoccerKick } from "react-icons/gi";
+import { AiOutlineTable } from "react-icons/ai";
 import { Heading } from "@aws-amplify/ui-react";
 
 export const ClassCard = (props) => {
@@ -35,11 +36,11 @@ export const ClassCard = (props) => {
     <div style={styles.container}>
       <div style={styles.cardRow}>
         <div style={styles.circleButtonContainer}>
-          <CircleButton text={event.type} size="small">
+          <CircleButton text={event.type} size="small" theme="dark">
             {event.type == "Altinha" ? (
               <GiSoccerKick style={styles.icon} />
             ) : (
-              <GiFishingNet style={styles.icon} />
+              <AiOutlineTable style={styles.icon} />
             )}
           </CircleButton>
         </div>
@@ -48,7 +49,7 @@ export const ClassCard = (props) => {
           <Heading level={3} style={styles.headerText}>
             {props.hour}:{props.minutes}
           </Heading>
-          <Heading level={6} style={styles.headerText}>
+          <Heading level={5} style={styles.headerText}>
             {props.spots} vagas
           </Heading>
         </div>
@@ -61,8 +62,8 @@ export const ClassCard = (props) => {
               justifyContent: "center",
             }}
           >
-            <AiFillMinusCircle
-              style={styles.iconBlack}
+            <TiDelete
+              style={styles.iconDelete}
               onClick={() => handleDeleteClass()}
             />
           </div>
@@ -75,13 +76,13 @@ export const ClassCard = (props) => {
 const styles = {
   container: {
     display: "flex",
-    width: "90vw",
+    width: "90%",
     border: "1px solid #000",
+    borderRadius: "10px",
     backgroundColor: "#fff",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "5px",
     margin: "1rem",
   },
   cardRow: {
@@ -99,6 +100,7 @@ const styles = {
     flex: 1,
     alignItems: "center",
   },
+
   circleButtonContainer: {
     display: "flex",
     flex: 1,
@@ -113,11 +115,12 @@ const styles = {
   },
 
   icon: {
-    fontSize: "3rem",
+    fontSize: "2.5rem",
     cursor: "pointer",
     color: "#fff",
   },
-  iconBlack: {
+
+  iconDelete: {
     fontSize: "2rem",
     cursor: "pointer",
     color: "#a00",
