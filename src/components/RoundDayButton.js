@@ -23,7 +23,7 @@ const styles = {
     maxHeight: "50px",
     maxWidth: "50px",
     marginTop: "0.5rem",
-    backgroundColor: "#000",
+    backgroundColor: "#fff",
     boxShadow: "0px 0px 5px #000",
     borderRadius: "50%",
     border: "1px solid #000",
@@ -35,6 +35,6 @@ const styles = {
     paddingTop: "0.25rem",
     fontSize: "1rem",
     fontFamily: "azonix",
-    color: "#fff",
+    color: "#000",
   },
 };
