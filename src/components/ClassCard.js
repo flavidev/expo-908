@@ -1,10 +1,12 @@
-import { deleteClass, joinClass } from "../api/API";
-import { Heading } from "@aws-amplify/ui-react";
+import { Divider, Heading, ScrollView } from "@aws-amplify/ui-react";
 
+import { Avatar } from "./Avatar";
 import { CircleButton } from "./CircleButton";
 import { GiSoccerKick } from "react-icons/gi";
 import { AiOutlineTable } from "react-icons/ai";
 import { BsSquare, BsCheckSquare } from "react-icons/bs";
+
+import { deleteClass, joinClass } from "../api/API";
 
 export const ClassCard = (props) => {
   const event = {
@@ -22,6 +24,12 @@ export const ClassCard = (props) => {
 
   const handleJoinClass = async () => {
     await joinClass(event.id, event.userId);
+    await props.refreshClasses();
+  };
+
+  const handleRemoveFromClass = async (id) => {
+    const userId = id;
+    await joinClass(event.id, userId);
     await props.refreshClasses();
   };
 
@@ -81,6 +89,19 @@ export const ClassCard = (props) => {
           )}
         </div>
       </div>
+      <Divider orientation="horizontal" border={"1px dashed #000 "} />
+      <ScrollView style={styles.avatarRow}>
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+      </ScrollView>
     </div>
   );
 };
@@ -104,7 +125,15 @@ const styles = {
     width: "95%",
     justifyContent: "center",
     alignItems: "center",
-    margin: "1rem",
+    margin: "0.5rem",
+  },
+  avatarRow: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "row",
+    maxWidth: "100%",
+    alignItems: "center",
+    margin: "0.5rem",
   },
   circleButtonContainer: {
     display: "flex",
