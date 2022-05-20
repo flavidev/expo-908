@@ -9,19 +9,12 @@ function Header(props) {
     <div style={styles.container}>
       <ProfilePicture user={props.user} />
       <div style={styles.userInfoContainer}>
-        <Text className="small-text">
-          {" "}
-          {given_name} {name}{" "}
+        <Text style={styles.userInfoText}>
+          {given_name} {name}
         </Text>
-        <Text className="small-text"> {email} </Text>
-        <Text className="small-text">
-          {" "}
-          Plano: {isAdmin ? "Administrador" : "2x"}
-        </Text>
-
-        <Text className="small-text">
-          {" "}
-          Créditos restantes: {isAdmin ? "99" : "2"}{" "}
+        <Text style={styles.userInfoText}> {email} </Text>
+        <Text style={styles.userInfoText}>
+          {isAdmin ? "Administrador" : "2x / Semana"}
         </Text>
       </div>
     </div>
@@ -47,8 +40,13 @@ const styles = {
     flex: 2,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "flex-end",
+  },
+
+  userInfoText: {
+    fontSize: "1.25rem",
+    color: "#fff",
   },
 };
 

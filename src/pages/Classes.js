@@ -14,6 +14,7 @@ import { GiNightSleep } from "react-icons/gi";
 
 const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
+  const userId = props.user.sub;
 
   const [currentDay, setCurrentDay] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -116,7 +117,9 @@ const Classes = (props) => {
                       duration={item.duration}
                       spots={item.spots}
                       isAdmin={isAdmin}
+                      userId={userId}
                       refreshClasses={getData}
+                      confirmed={item.confirmed}
                     />
                   ))}
 

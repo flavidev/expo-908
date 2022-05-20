@@ -12,6 +12,18 @@ export const getClasses = async () => {
   return response.data;
 };
 
+export const getClassById = async (classId) => {
+  const response = await api.get("classes");
+  if (response.data.body.length > 0) {
+    const foundClass = response.data.body.filter(
+      (item) => item.classesId === classId
+    );
+    return foundClass[0];
+  } else {
+    return null;
+  }
+};
+
 export const createClass = async (data) => {
   const response = await api.post("classes", data);
   return response;
@@ -22,9 +34,33 @@ export const deleteClass = async (data) => {
   return response;
 };
 
-export const updateClass = async (id, data) => {
-  const response = await api.put(`classes/${id}`, data);
-  return response.data;
+export const joinClass = async (eventId, userId) => {
+  const event = await getClassById(eventId);
+  const isEnrolled = event.confirmed.includes(userId);
+  if (
+    window.confirm(
+      `Confirma a ${
+        isEnrolled ? "saída dessa" : "presença nessa"
+      } aula de ${event.type.toLowerCase()} que começa às ${event.hour}:${
+        event.minutes
+      }`
+    )
+  ) {
+    if (!isEnrolled) {
+      let updatedClass = event;
+      updatedClass.confirmed = [...updatedClass.confirmed, userId];
+      updatedClass.spots = (parseInt(updatedClass.spots) - 1).toString();
+      await createClass(updatedClass);
+    } else {
+      let updatedClass = event;
+      updatedClass.confirmed = updatedClass.confirmed.filter(
+        (item) => item !== userId
+      );
+      updatedClass.spots = (parseInt(updatedClass.spots) + 1).toString();
+
+      await createClass(updatedClass);
+    }
+  }
 };
 
 // profile pictures
@@ -64,7 +100,6 @@ export const uploadProfilePicture = async (userId, file) => {
       console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
     },
   });
-  console.log(response);
   return response;
 };
 
