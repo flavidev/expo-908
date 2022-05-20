@@ -8,7 +8,7 @@ import { GiConfirmed } from "react-icons/gi";
 import { v4 } from "uuid";
 
 function AddClass(props) {
-  //const userId = props.user.sub;
+  const userId = props.user.sub;
 
   const refreshClasses = props.refreshClasses;
 
@@ -22,6 +22,7 @@ function AddClass(props) {
     day: currentDay,
     duration: "60",
     spots: "12",
+    confirmed: [userId],
   });
 
   //const [isLoading, setIsLoading] = useState(false);

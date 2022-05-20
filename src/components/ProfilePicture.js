@@ -1,57 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Image } from "@aws-amplify/ui-react";
-import { Storage } from "aws-amplify";
 import { Spinner } from "./Spinner";
-import defaultProfilePicture from "../assets/images/profile.png";
 
-import { checkImageURL } from "../utils/checkImageURL";
+import { uploadProfilePicture, getProfilePicture } from "../api/API";
+//import defaultProfilePicture from "../assets/images/profile.png";
 
 export const ProfilePicture = (props) => {
-  const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
+  const userId = props.user.sub;
+
+  const [profilePicture, setProfilePicture] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getSavedProfilePicture();
+    handleGetProfilePicture();
   }, []);
 
-  const key = `${props.user.given_name}${props.user.name}-${props.user.sub}`;
-  const imageKitResizedImage = (width) =>
-    `https://ik.imagekit.io/fzwpyzjcl9f/${key}?tr=w-${width || 100}`;
-
-  async function getSavedProfilePicture() {
-    await checkImageURL(imageKitResizedImage()).then((isValid) => {
-      if (isValid) {
-        setProfilePicture(imageKitResizedImage(100));
-        setIsLoading(false);
-      } else {
-        setProfilePicture(defaultProfilePicture);
-        setIsLoading(false);
-      }
-    });
-  }
+  const handleGetProfilePicture = async () => {
+    setIsLoading(true);
+    const profilePicture = await getProfilePicture(userId);
+    setProfilePicture(profilePicture);
+    setIsLoading(false);
+  };
 
   async function handleFile(file) {
     setIsLoading(true);
-
-    try {
-      const list = await Storage.list(key);
-      if (list.length > 0) {
-        await Storage.remove(key);
-      }
-
-      const response = await Storage.put(key, file, {
-        contentType: "image/png",
-        progressCallback: (progress) => {
-          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-        },
-      });
-      console.log(response);
-      setIsLoading(false);
-      const uploadedImage = URL.createObjectURL(file);
-      setProfilePicture(uploadedImage);
-    } catch (error) {
-      console.log("Error uploading file:", error);
-    }
+    const picture = await uploadProfilePicture(userId, file);
+    handleGetProfilePicture(picture);
   }
 
   const handleClick = () => {

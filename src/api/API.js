@@ -1,8 +1,11 @@
 import axios from "axios";
+import { Storage } from "aws-amplify";
 
 const api = axios.create({
   baseURL: "https://v2ph0dafi3.execute-api.sa-east-1.amazonaws.com/dev/eae/",
 });
+
+// classes
 
 export const getClasses = async () => {
   const response = await api.get("classes");
@@ -24,6 +27,47 @@ export const updateClass = async (id, data) => {
   return response.data;
 };
 
+// profile pictures
+
+const getProfilePictureKey = async (userId) => {
+  const images = await Storage.list("");
+  const profilePictureKeyArray = images.filter((item) =>
+    item.key.includes(userId)
+  );
+  const profilePictureKey =
+    profilePictureKeyArray.length > 0 ? profilePictureKeyArray[0].key : null;
+  return profilePictureKey;
+};
+
+export const getProfilePicture = async (userId) => {
+  const key = await getProfilePictureKey(userId);
+  const resizedURL = "https://ik.imagekit.io/fzwpyzjcl9f/";
+
+  if (key) {
+    return resizedURL + key;
+  }
+  return "https://ik.imagekit.io/fzwpyzjcl9f/default-profile-picture.png";
+};
+
+export const uploadProfilePicture = async (userId, file) => {
+  const key = await getProfilePictureKey(userId);
+  if (key) {
+    await Storage.remove(key);
+  }
+
+  const newKey = `${userId}-${new Date().getTime()}`;
+
+  const response = await Storage.put(newKey + ".png", file, {
+    contentType: "image/png",
+    level: "public",
+    progressCallback: (progress) => {
+      console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+    },
+  });
+  console.log(response);
+  return response;
+};
+
 // Timeline database structure:
 
 export const getPosts = async () => {
@@ -40,64 +84,3 @@ export const deletePost = async (id) => {
   const response = await api.delete(`posts/${id}`);
   return response.data;
 };
-
-/* const tableOfClasses = [
-        { day: "Domingo", events: [] },
-
-        { day: "Segunda", events: [] },
-
-        {
-            day: "Terça",
-            events: [
-                { title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "7" },
-                { title: "Altinha", starts: "08:00", ends: "09:00", availableSpots: "2" },
-                { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "1" },
-                { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "1" },
-                { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "1" },
-                { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "1" },
-            ],
-        },
-
-        {
-            day: "Quarta",
-            events: [{
-                    title: "Altinha",
-                    starts: "09:30",
-                    ends: "10:30",
-                    availableSpots: "10",
-                },
-                { title: "Altinha", starts: "17:00", ends: "18:00", availableSpots: "1" },
-            ],
-        },
-
-        {
-            day: "Quinta",
-            events: [
-                { title: "Altinha", starts: "07:00", ends: "08:00", availableSpots: "8" },
-                { title: "Altinha", starts: "08:00", ends: "09:00", availableSpots: "4" },
-                { title: "Altinha", starts: "18:00", ends: "19:00", availableSpots: "9" },
-            ],
-        },
-
-        {
-            day: "Sexta",
-            events: [
-                { title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "2" },
-                {
-                    title: "Altinha",
-                    starts: "17:00",
-                    ends: "18:00",
-                    availableSpots: "11",
-                },
-            ],
-        },
-
-        {
-            day: "Sábado",
-            events: [
-                { title: "Altinha", starts: "08:30", ends: "09:30", availableSpots: "5" },
-                { title: "Altinha", starts: "09:30", ends: "10:30", availableSpots: "7" },
-            ],
-        },
-    ];
-*/
