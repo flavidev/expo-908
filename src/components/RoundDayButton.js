@@ -1,4 +1,6 @@
-import { Flex, Button, Text } from "@aws-amplify/ui-react";
+import { Image, Divider, Text } from "@aws-amplify/ui-react";
+
+import ball from "../assets/images/bola-eae.png";
 
 export const RoundDayButton = (props) => {
   const text = props.text;
@@ -8,33 +10,35 @@ export const RoundDayButton = (props) => {
   };
 
   return (
-    <Flex style={styles.buttonIcon}>
-      <Button style={styles.button} onClick={handleClick}>
-        <Text style={styles.buttonText}>{text}</Text>
-      </Button>
-    </Flex>
+    <div style={styles.container} onClick={handleClick}>
+      <Image src={ball} style={styles.ball} />
+      <Text style={styles.buttonText}>{text}</Text>
+      <Divider orientation="horizontal" size="small" />
+    </div>
   );
 };
 
 const styles = {
-  button: {
-    height: "12.5vw",
-    width: "12.5vw",
-    maxHeight: "50px",
-    maxWidth: "50px",
-    marginTop: "0.5rem",
-    backgroundColor: "#fff",
-    boxShadow: "0px 0px 5px #000",
-    borderRadius: "50%",
-    border: "1px solid #000",
-    justifyContent: "",
+  container: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: "0.25rem",
+    cursor: "pointer",
   },
-
+  ball: {
+    height: "13vw",
+    width: "13vw",
+    maxHeight: "75px",
+    maxWidth: "75px",
+    borderRadius: "50%",
+  },
   buttonText: {
-    paddingTop: "0.25rem",
+    margin: "0.25rem",
+    fontFamily: "Azonix",
     fontSize: "1rem",
-    fontFamily: "azonix",
-    color: "#000",
+    color: "#fff",
   },
 };

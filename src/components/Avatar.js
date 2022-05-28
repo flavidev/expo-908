@@ -41,8 +41,8 @@ const styles = {
   avatar: {
     width: "10vw",
     height: "10vw",
-    maxWidth: "150px",
-    maxHeight: "150px",
+    maxWidth: "75px",
+    maxHeight: "75px",
     borderRadius: "50%",
     boxShadow: "0px 0px 1px ##000",
     border: "1px solid #000",

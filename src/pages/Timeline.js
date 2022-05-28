@@ -50,31 +50,33 @@ const Timeline = (props) => {
             ))}
         </ScrollView>
       </div>
-      <div style={styles.inputContainer}>
-        <TextField
-          placeholder="Digite o texto da sua postagem"
-          isMultiline={true}
-          style={styles.textfield}
-          value={newPost.content}
-          onChange={(event) =>
-            setNewPost({
-              ...newPost,
-              content: event.target.value,
-              time: new Date().toLocaleTimeString("pt-BR"),
-              date: new Date().toLocaleDateString("pt-BR"),
-            })
-          }
-        />
-        <CircleButton
-          style={styles.button}
-          className="post-button"
-          onClick={handleSubmit}
-          size="small"
-          theme="light"
-        >
-          <BiMailSend style={styles.icon} />
-        </CircleButton>
-      </div>
+      {props.user.isAdmin && (
+        <div style={styles.inputContainer}>
+          <TextField
+            placeholder="Digite o texto da sua postagem"
+            isMultiline={true}
+            style={styles.textfield}
+            value={newPost.content}
+            onChange={(event) =>
+              setNewPost({
+                ...newPost,
+                content: event.target.value,
+                time: new Date().toLocaleTimeString("pt-BR"),
+                date: new Date().toLocaleDateString("pt-BR"),
+              })
+            }
+          />
+          <CircleButton
+            style={styles.button}
+            className="post-button"
+            onClick={handleSubmit}
+            size="small"
+            theme="light"
+          >
+            <BiMailSend style={styles.icon} />
+          </CircleButton>
+        </div>
+      )}
     </div>
   );
 };

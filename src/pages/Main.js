@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { View, Heading, Image } from "@aws-amplify/ui-react";
 
 import Timeline from "./Timeline";
 import Classes from "./Classes";
@@ -8,12 +7,10 @@ import Account from "./Account";
 import Header from "../components/Header";
 import BottomTabs from "../components/BottomTabs";
 
-import logo from "../assets/images/eae-logo-1.png";
-
 import { checkUser } from "../utils/checkUser";
 
 function Main(props) {
-  const [isTimeline, setIsTimeline] = useState(false);
+  const [isTimeline, setIsTimeline] = useState(true);
   const [isClasses, setIsClasses] = useState(false);
   const [isAccount, setIsAccount] = useState(false);
   const [user, setUser] = useState({
@@ -58,14 +55,6 @@ function Main(props) {
       </div>
 
       <div style={styles.bodyContainer}>
-        {!isTimeline && !isClasses && !isAccount && (
-          <View className="container">
-            <Image src={logo} style={styles.logo} />
-            <Heading level={6} color={"#fff"}>
-              Selecione um campo no menu do rodapé
-            </Heading>
-          </View>
-        )}
         {isTimeline && <Timeline user={user} />}
         {isClasses && <Classes user={user} />}
         {isAccount && (

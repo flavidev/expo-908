@@ -101,6 +101,76 @@ export const ClassCard = (props) => {
             }}
           />
         ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
+        {event.confirmed.map((userId, index) => (
+          <Avatar
+            key={index}
+            userId={userId}
+            size="small"
+            onClick={() => {
+              event.isAdmin && handleRemoveFromClass(userId);
+            }}
+          />
+        ))}
       </ScrollView>
     </div>
   );
