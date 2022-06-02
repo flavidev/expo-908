@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createClass } from "../api/API";
 
-import { SliderField, Heading } from "@aws-amplify/ui-react";
+import { View, SliderField, Heading, SelectField } from "@aws-amplify/ui-react";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
 
@@ -26,12 +26,6 @@ function AddClass(props) {
   });
 
   //const [isLoading, setIsLoading] = useState(false);
-
-  const typeOfClass = ["Altinha", "Futevôlei"];
-
-  function handleChangeType(value) {
-    setNewClass({ ...newClass, type: typeOfClass[value] });
-  }
 
   function handleChangeHour(value) {
     setNewClass({
@@ -72,23 +66,18 @@ function AddClass(props) {
   };
 
   return (
-    <div className="container">
-      <div style={styles.headerContainer}>
-        <Heading level={4} fontFamily="azonix">
-          {days[currentDay]}
-        </Heading>
-      </div>
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <Heading style={styles.title}>{days[currentDay]}</Heading>
+      </View>
 
-      <div style={styles.addClassContainer}>
-        <SliderField
-          filledTrackColor={"#fff"}
-          label={newClass.type}
-          min={0}
-          max={typeOfClass.length - 1}
-          step={1}
-          value={typeOfClass.indexOf(newClass.type)}
-          isValueHidden={true}
-          onChange={handleChangeType}
+      <View style={styles.addClassContainer}>
+        <SelectField
+          options={["Altinha", "Futevôlei"]}
+          labelHidden
+          onChange={(e) => setNewClass({ ...newClass, type: e.target.value })}
+          value={newClass.type}
+          style={styles.classSelector}
         />
 
         <SliderField
@@ -109,7 +98,7 @@ function AddClass(props) {
         />
         <SliderField
           min={0}
-          max={120}
+          max={180}
           step={5}
           label="Duração (minutos)"
           onChange={handleChangeDuration}
@@ -117,18 +106,18 @@ function AddClass(props) {
         />
         <SliderField
           min={1}
-          max={20}
+          max={30}
           step={1}
           label="Vagas"
           onChange={handleChangeSpots}
           value={newClass.spots}
         />
-      </div>
-      <div style={styles.bottomContainer}>
+      </View>
+      <View style={styles.bottomContainer}>
         <RiArrowGoBackFill onClick={handleCloseAddClass} style={styles.icon} />
         <GiConfirmed onClick={handleSubmit} style={styles.icon} />
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
 
@@ -152,6 +141,15 @@ const styles = {
 
   title: {
     color: "#fff",
+    fontSize: "1.5rem",
+    fontFamily: "Azonix",
+  },
+
+  classSelector: {
+    backgroundColor: "#fff",
+    textAlign: "center",
+    fontSize: "1.25rem",
+    fontFamily: "Azonix",
   },
   addClassContainer: {
     display: "flex",

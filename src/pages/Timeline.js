@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, TextField } from "@aws-amplify/ui-react";
+import { ScrollView, TextAreaField } from "@aws-amplify/ui-react";
 import { CircleButton } from "../components/CircleButton";
 import { BiMailSend } from "react-icons/bi";
 
@@ -52,9 +52,8 @@ const Timeline = (props) => {
       </div>
       {props.user.isAdmin && (
         <div style={styles.inputContainer}>
-          <TextField
+          <TextAreaField
             placeholder="Digite o texto da sua postagem"
-            isMultiline={true}
             style={styles.textfield}
             value={newPost.content}
             onChange={(event) =>

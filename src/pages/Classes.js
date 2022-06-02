@@ -3,7 +3,7 @@ import { getClasses } from "../api/API";
 
 import AddClass from "./AddClass";
 
-import { Heading, ScrollView } from "@aws-amplify/ui-react";
+import { View, Flex, Heading, ScrollView } from "@aws-amplify/ui-react";
 import { Spinner } from "../components/Spinner";
 import { ClassCard } from "../components/ClassCard";
 import { CircleButton } from "../components/CircleButton";
@@ -55,39 +55,38 @@ const Classes = (props) => {
   };
 
   return (
-    <div style={styles.container}>
+    <View style={styles.container}>
       {isLoading && <Spinner />}
 
       {data && !isLoading && !isAddClass && (
         <>
-          <div style={styles.buttonContainer}>
+          <View style={styles.buttonContainer}>
             {weekDays.map((day, index) => (
               <RoundDayButton
                 size="small"
                 text={day}
                 key={index}
-                className="week-calendar-button"
                 isFullWidth={true}
                 onClick={() => (getData(), setCurrentDay(index))}
               ></RoundDayButton>
             ))}
-          </div>
+          </View>
 
           {currentDay === "" && (
-            <div className="container">
+            <View style={styles.container}>
               <CircleButton
                 text="Selecione um dia"
                 onClick={() => alert("Escolha um dia da semana no menu acima")}
               >
                 <ImPointUp style={{ fontSize: "3.5rem" }} />
               </CircleButton>
-            </div>
+            </View>
           )}
 
           {currentDay !== "" && (
             <>
-              <div style={styles.headerContainer}>
-                <Heading level={5} fontFamily="azonix">
+              <View style={styles.headerContainer}>
+                <Heading style={styles.header}>
                   {days[currentDay]}
                   {data.body.filter((element) => element.day == currentDay)
                     .length > 0 &&
@@ -101,7 +100,7 @@ const Classes = (props) => {
                           : ""
                       }`}
                 </Heading>
-              </div>
+              </View>
               <ScrollView style={styles.calendarScrollView}>
                 {data.body
                   .filter((element) => element.day == currentDay)
@@ -125,14 +124,20 @@ const Classes = (props) => {
 
                 {data.body.filter((element) => element.day == currentDay)
                   .length === 0 && (
-                  <div className="container">
+                  <Flex
+                    style={{
+                      justifyContent: "center",
+                      height: "100%",
+                      flexDirection: "column",
+                    }}
+                  >
                     <CircleButton
                       text="Dia de folga"
                       onClick={() => alert("Não há aulas para este dia")}
                     >
                       <GiNightSleep style={{ fontSize: "3.5rem" }} />
                     </CircleButton>
-                  </div>
+                  </Flex>
                 )}
               </ScrollView>
             </>
@@ -156,7 +161,7 @@ const Classes = (props) => {
           refreshClasses={getData}
         />
       )}
-    </div>
+    </View>
   );
 };
 
@@ -184,6 +189,10 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "1rem",
+  },
+  header: {
+    fontFamily: "azonix",
+    fontSize: "1.5rem",
   },
 
   calendarScrollView: {

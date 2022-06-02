@@ -1,4 +1,4 @@
-import { Divider, Heading, ScrollView } from "@aws-amplify/ui-react";
+import { View, Divider, Heading, ScrollView } from "@aws-amplify/ui-react";
 
 import { Avatar } from "./Avatar";
 import { CircleButton } from "./CircleButton";
@@ -49,9 +49,9 @@ export const ClassCard = (props) => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.cardRow}>
-        <div style={styles.circleButtonContainer}>
+    <View style={styles.container}>
+      <View style={styles.cardRow}>
+        <View style={styles.circleButtonContainer}>
           <CircleButton
             text={event.type}
             size="small"
@@ -64,18 +64,16 @@ export const ClassCard = (props) => {
               <AiOutlineTable style={styles.icon} />
             )}
           </CircleButton>
-        </div>
+        </View>
 
-        <div style={styles.headerContainer}>
-          <Heading level={3} style={styles.headerText}>
+        <View style={styles.headerContainer}>
+          <Heading style={styles.timeText}>
             {props.hour}:{props.minutes}
           </Heading>
-          <Heading level={5} style={styles.headerText}>
-            {props.spots} vagas
-          </Heading>
-        </div>
+          <Heading style={styles.descriptionText}>{props.spots} vagas</Heading>
+        </View>
 
-        <div style={styles.checkBoxContainer}>
+        <View style={styles.checkBoxContainer}>
           {event.confirmed.includes(event.userId) ? (
             <BsCheckSquare
               onClick={() => handleJoinClass()}
@@ -87,8 +85,8 @@ export const ClassCard = (props) => {
               style={styles.iconBlack}
             />
           )}
-        </div>
-      </div>
+        </View>
+      </View>
       <Divider orientation="horizontal" border={"1px dashed #000 "} />
       <ScrollView style={styles.avatarRow}>
         {event.confirmed.map((userId, index) => (
@@ -172,7 +170,7 @@ export const ClassCard = (props) => {
           />
         ))}
       </ScrollView>
-    </div>
+    </View>
   );
 };
 
@@ -223,9 +221,16 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-around",
   },
-  headerText: {
+  descriptionText: {
     fontFamily: "Azonix",
     color: "#000",
+    fontSize: "1rem",
+    margin: "0.15rem",
+  },
+  timeText: {
+    fontFamily: "Azonix",
+    color: "#000",
+    fontSize: "1.75rem",
     margin: "0.15rem",
   },
   icon: {
