@@ -90,12 +90,6 @@
   border-color: #8055a4;
 }
 
-.loader {
-  width: 120px;
-  height: 120px;
-  animation: spin 1s linear infinite;
-}
-
 .amplify-sliderfield {
   color: #fff;
   font-size: 0.1rem;
@@ -192,6 +186,23 @@
   100% {
     transform: scale(1);
     transform-origin: 50% 100%;
+    opacity: 1;
+  }
+}
+
+.loader {
+  width: 120px;
+  height: 120px;
+  animation: swirl-in-fwd 1s linear infinite;
+}
+
+@keyframes swirl-in-fwd {
+  0% {
+    transform: rotate(-540deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0) scale(1);
     opacity: 1;
   }
 }
