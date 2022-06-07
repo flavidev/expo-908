@@ -29,5 +29,6 @@ export const dictPTBR = {
     "Your code is on the way. To log in, enter the code we sent you. It may take a minute to arrive.":
       "Seu código está sendo enviado. Para entrar, digite o código que enviamos para você. Pode demorar um minuto para chegar.",
     "Please fill out this field.": "Por favor, preencha este campo.",
+    "Fill out this field": "Preencha este campo",
   },
 };

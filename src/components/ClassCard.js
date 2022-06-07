@@ -1,10 +1,19 @@
-import { View, Divider, Heading, ScrollView } from "@aws-amplify/ui-react";
+import {
+  Image,
+  View,
+  Divider,
+  Heading,
+  ScrollView,
+} from "@aws-amplify/ui-react";
 
 import { Avatar } from "./Avatar";
 import { CircleButton } from "./CircleButton";
-import { GiSoccerKick } from "react-icons/gi";
-import { AiOutlineTable } from "react-icons/ai";
+//import { GiSoccerKick } from "react-icons/gi";
+//import { AiOutlineTable } from "react-icons/ai";
 import { BsSquare, BsCheckSquare } from "react-icons/bs";
+
+import altinha from "../assets/images/altinha.png";
+import futevolei from "../assets/images/futevolei.png";
 
 import { deleteClass, joinClass } from "../api/API";
 
@@ -59,9 +68,9 @@ export const ClassCard = (props) => {
             onClick={() => handleDeleteClass()}
           >
             {event.type == "Altinha" ? (
-              <GiSoccerKick style={styles.icon} />
+              <Image src={altinha} style={{ width: "25vw" }} />
             ) : (
-              <AiOutlineTable style={styles.icon} />
+              <Image src={futevolei} style={{ width: "25vw" }} />
             )}
           </CircleButton>
         </View>
@@ -89,76 +98,6 @@ export const ClassCard = (props) => {
       </View>
       <Divider orientation="horizontal" border={"1px dashed #000 "} />
       <ScrollView style={styles.avatarRow}>
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
-        {event.confirmed.map((userId, index) => (
-          <Avatar
-            key={index}
-            userId={userId}
-            size="small"
-            onClick={() => {
-              event.isAdmin && handleRemoveFromClass(userId);
-            }}
-          />
-        ))}
         {event.confirmed.map((userId, index) => (
           <Avatar
             key={index}

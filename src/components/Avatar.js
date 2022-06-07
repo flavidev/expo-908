@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Flex, Image } from "@aws-amplify/ui-react";
 import { getProfilePicture } from "../api/API";
 
+import confirmado from "../assets/images/confirmado.png";
+
 export const Avatar = (props) => {
   const [profilePicture, setProfilePicture] = useState();
 
@@ -16,7 +18,9 @@ export const Avatar = (props) => {
 
   const handleGetProfilePicture = async () => {
     const profilePicture = await getProfilePicture(props.userId);
-    setProfilePicture(profilePicture);
+    profilePicture === "https://ik.imagekit.io/fzwpyzjcl9f/profile-picture.png"
+      ? setProfilePicture(confirmado)
+      : setProfilePicture(profilePicture);
   };
 
   return (

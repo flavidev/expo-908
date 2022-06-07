@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getClasses } from "../api/API";
 
 import AddClass from "./AddClass";
 
-import { View, Flex, Heading, ScrollView } from "@aws-amplify/ui-react";
+import { View, Flex, Heading, ScrollView, Image } from "@aws-amplify/ui-react";
 import { Spinner } from "../components/Spinner";
 import { ClassCard } from "../components/ClassCard";
 import { CircleButton } from "../components/CircleButton";
 import { RoundDayButton } from "../components/RoundDayButton";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { ImPointUp } from "react-icons/im";
-import { GiNightSleep } from "react-icons/gi";
+
+import dayOff from "../assets/images/folga.png";
 
 const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
   const userId = props.user.sub;
+
+  const isMounted = useRef(true);
 
   const [currentDay, setCurrentDay] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +34,14 @@ const Classes = (props) => {
     "Sábado",
   ];
 
+  //fix memory leak by only changing the state when the component is mounted
+  useEffect(
+    () => () => {
+      isMounted.current = false;
+    },
+    []
+  );
+
   useEffect(() => {
     getData();
   }, []);
@@ -39,7 +50,9 @@ const Classes = (props) => {
     setIsLoading(true);
     try {
       const response = await getClasses();
-      setData(response);
+      if (isMounted.current) {
+        setData(response);
+      }
       setIsLoading(false);
     } catch (error) {
       alert(error);
@@ -135,7 +148,7 @@ const Classes = (props) => {
                       text="Dia de folga"
                       onClick={() => alert("Não há aulas para este dia")}
                     >
-                      <GiNightSleep style={{ fontSize: "3.5rem" }} />
+                      <Image src={dayOff} style={{ width: "30vw" }} />
                     </CircleButton>
                   </Flex>
                 )}

@@ -82,7 +82,7 @@ export const getProfilePicture = async (userId) => {
   if (key) {
     return resizedURL + key;
   }
-  return "https://ik.imagekit.io/fzwpyzjcl9f/default-profile-picture.png";
+  return "https://ik.imagekit.io/fzwpyzjcl9f/profile-picture.png";
 };
 
 export const uploadProfilePicture = async (userId, file) => {

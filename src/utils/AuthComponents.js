@@ -24,9 +24,10 @@ export const formFields = {
       isRequired: true,
     },
     birthdate: {
-      label: "Data de nascimento",
+      label: "Nascimento",
       labelHidden: false,
       isRequired: true,
+      width: "100%",
     },
   },
 };

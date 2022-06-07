@@ -1,6 +1,10 @@
 import React from "react";
-import { IoLogoWhatsapp } from "react-icons/io";
-import { MdEmail } from "react-icons/md";
+import { Image } from "@aws-amplify/ui-react";
+import whatsapp from "../assets/images/whatsapp.png";
+import email from "../assets/images/email.png";
+
+//import { IoLogoWhatsapp } from "react-icons/io";
+//import { MdEmail } from "react-icons/md";
 
 import { CircleButton } from "../components/CircleButton";
 
@@ -24,11 +28,11 @@ function Contact(props) {
   return (
     <div style={styles.container}>
       <CircleButton onClick={handleOpenWhatsApp} text="WhatsApp">
-        <IoLogoWhatsapp style={styles.icon} color="#075e54" />
+        <Image src={whatsapp} />
       </CircleButton>
 
       <CircleButton onClick={handleSendEmail} text="Email">
-        <MdEmail style={styles.icon} color="#f00" />
+        <Image src={email} />
       </CircleButton>
     </div>
   );

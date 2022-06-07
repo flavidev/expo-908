@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { Image } from "@aws-amplify/ui-react";
+
 import Plans from "./Plans";
 import About from "./About";
 import Contact from "./Contact";
@@ -7,8 +9,11 @@ import Contact from "./Contact";
 import { CircleButton } from "../components/CircleButton";
 
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { MdEditCalendar } from "react-icons/md";
-import { IoMdExit } from "react-icons/io";
+
+import planos from "../assets/images/planos.png";
+import sair from "../assets/images/sair.png";
+
+//import { IoMdExit } from "react-icons/io";
 import { GiNotebook } from "react-icons/gi";
 import { GrContact } from "react-icons/gr";
 
@@ -53,7 +58,7 @@ const Account = (props) => {
         <>
           <div style={styles.buttonsRow}>
             <CircleButton onClick={handleSetIsPlan} text="Planos">
-              <MdEditCalendar style={styles.icon} />
+              <Image src={planos} />
             </CircleButton>
 
             <CircleButton onClick={handleSetIsContact} text="Contato">
@@ -67,7 +72,7 @@ const Account = (props) => {
             </CircleButton>
 
             <CircleButton onClick={handleSignOut} text="Sair">
-              <IoMdExit style={styles.icon} />
+              <Image src={sair} />
             </CircleButton>
           </div>
         </>

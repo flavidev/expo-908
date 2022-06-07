@@ -3,7 +3,6 @@ import { Image } from "@aws-amplify/ui-react";
 import { Spinner } from "./Spinner";
 
 import { uploadProfilePicture, getProfilePicture } from "../api/API";
-//import defaultProfilePicture from "../assets/images/profile.png";
 
 export const ProfilePicture = (props) => {
   const userId = props.user.sub;
