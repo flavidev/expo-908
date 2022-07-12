@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getClasses } from "../api/API";
 
 import AddClass from "./AddClass";
@@ -17,8 +17,6 @@ const Classes = (props) => {
   const isAdmin = props.user.isAdmin;
   const userId = props.user.sub;
 
-  const isMounted = useRef(true);
-
   const [currentDay, setCurrentDay] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAddClass, setIsAddClass] = useState(false);
@@ -34,14 +32,6 @@ const Classes = (props) => {
     "Sábado",
   ];
 
-  //fix memory leak by only changing the state when the component is mounted
-  useEffect(
-    () => () => {
-      isMounted.current = false;
-    },
-    []
-  );
-
   useEffect(() => {
     getData();
   }, []);
@@ -50,9 +40,7 @@ const Classes = (props) => {
     setIsLoading(true);
     try {
       const response = await getClasses();
-      if (isMounted.current) {
-        setData(response);
-      }
+      setData(response);
       setIsLoading(false);
     } catch (error) {
       alert(error);

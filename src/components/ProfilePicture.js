@@ -6,9 +6,8 @@ import { uploadProfilePicture, getProfilePicture } from "../api/API";
 
 export const ProfilePicture = (props) => {
   const userId = props.user.sub;
-
-  const [profilePicture, setProfilePicture] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [profilePicture, setProfilePicture] = useState();
 
   useEffect(() => {
     handleGetProfilePicture();

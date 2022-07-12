@@ -13,7 +13,6 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import planos from "../assets/images/planos.png";
 import sair from "../assets/images/sair.png";
 
-//import { IoMdExit } from "react-icons/io";
 import { GiNotebook } from "react-icons/gi";
 import { GrContact } from "react-icons/gr";
 
