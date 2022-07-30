@@ -1,33 +1,50 @@
-import { View, Image, Text, useAuthenticator } from "@aws-amplify/ui-react";
+import {
+  View,
+  Image,
+  Text,
+  Authenticator,
+  useAuthenticator,
+  SelectField,
+  TextAreaField,
+} from "@aws-amplify/ui-react";
 
 import logo from "../assets/images/eae-logo.png";
 
 export const formFields = {
   signUp: {
-    phone_number: {
-      dialCode: "+55",
+    email: {
       isRequired: true,
+      label: "Digite seu e-mail",
+      labelHidden: false,
+      placeholder: "email@exemplo.com",
+      type: "email",
+      order: 1,
+    },
+    given_name: {
+      isRequired: true,
+      label: "Nome",
+      labelHidden: true,
+      order: 2,
+    },
+    name: {
+      isRequired: true,
+      label: "Nome",
+      labelHidden: true,
+      order: 3,
+    },
+    phone_number: {
+      isRequired: true,
+      dialCode: "+55",
       label: "WhatsApp (somente números)",
       placeholder: "21999999999",
       labelHidden: false,
-    },
-    address: {
-      label: "Bairro",
-      labelHidden: false,
-      placeholder: "Copacabana",
-      isRequired: true,
-    },
-    gender: {
-      placeholder: "Feminino",
-      label: "Gênero",
-      labelHidden: false,
-      isRequired: true,
+      order: 4,
     },
     birthdate: {
+      isRequired: true,
       label: "Nascimento",
       labelHidden: false,
-      isRequired: true,
-      width: "100%",
+      order: 5,
     },
   },
 };
@@ -46,16 +63,6 @@ export const AuthComponents = {
           maxWidth="200px"
           className="bouncing-top"
         />
-      </View>
-    );
-  },
-
-  Footer() {
-    return (
-      <View textAlign="center" margin="5px" className="present-credits">
-        <Text color={"#fff"} fontSize={"0.8rem"}>
-          &copy; Desenvolvido por All Access Consultoria Ltda.
-        </Text>
       </View>
     );
   },
@@ -83,5 +90,41 @@ export const AuthComponents = {
         </View>
       );
     },
+  },
+
+  SignUp: {
+    FormFields() {
+      return (
+        <>
+          <Authenticator.SignUp.FormFields />
+          <SelectField
+            required={true}
+            name="gender"
+            placeholder="Selecione o gênero"
+          >
+            <option value="feminino">Feminino</option>
+            <option value="masculino">Masculino</option>
+            <option value="indeterminado">Prefiro não informar</option>
+          </SelectField>
+          <TextAreaField
+            required={true}
+            name="address"
+            label="Endereço"
+            type={"number"}
+            placeholder="Ex: Av. Atlântica, nº 123, apto 123, Copacabana, Rio de Janeiro"
+          />
+        </>
+      );
+    },
+  },
+
+  Footer() {
+    return (
+      <View textAlign="center" margin="5px" className="present-credits">
+        <Text color={"#fff"} fontSize={"0.8rem"}>
+          &copy; Desenvolvido por All Access Consultoria Ltda.
+        </Text>
+      </View>
+    );
   },
 };

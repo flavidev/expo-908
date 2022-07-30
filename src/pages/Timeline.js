@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { ScrollView, TextAreaField } from "@aws-amplify/ui-react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "./Main";
+
+import { ScrollView, TextAreaField, View } from "@aws-amplify/ui-react";
 import { CircleButton } from "../components/CircleButton";
 import { BiMailSend } from "react-icons/bi";
 
@@ -7,11 +9,14 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Post } from "../components/Post";
 
-const Timeline = (props) => {
+const Timeline = () => {
+  const user = useContext(UserContext);
+
   const [posts, setPosts] = useState([]);
+
   const [newPost, setNewPost] = useState({
     id: uuidv4(),
-    author: `${props.user.given_name} ${props.user.name}`,
+    author: `${user.given_name} ${user.name}`,
     content: "",
     time: "",
     date: "",
@@ -39,19 +44,18 @@ const Timeline = (props) => {
   };
 
   return (
-    <div className="container">
-      <div style={styles.scrollviewContainer}>
-        <ScrollView orientation="vertical" style={styles.scrollview}>
-          {posts
-            .slice(0)
-            .reverse()
-            .map((post) => (
-              <Post key={post.id} post={post} deletePost={handleDeletePost} />
-            ))}
-        </ScrollView>
-      </div>
-      {props.user.isAdmin && (
-        <div style={styles.inputContainer}>
+    <View style={styles.container}>
+      <ScrollView orientation="vertical" style={styles.scrollview}>
+        {posts
+          .slice(0)
+          .reverse()
+          .map((post) => (
+            <Post key={post.id} post={post} deletePost={handleDeletePost} />
+          ))}
+      </ScrollView>
+
+      {user.isAdmin && (
+        <View style={styles.inputContainer}>
           <TextAreaField
             placeholder="Digite o texto da sua postagem"
             style={styles.textfield}
@@ -74,26 +78,29 @@ const Timeline = (props) => {
           >
             <BiMailSend style={styles.icon} />
           </CircleButton>
-        </div>
+        </View>
       )}
-    </div>
+    </View>
   );
 };
 
 const styles = {
-  scrollviewContainer: {
-    width: "100vw",
-    height: "55vh",
+  container: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
   scrollview: {
-    height: "100%",
+    flexDirection: "column",
+    flex: 4,
+    height: "66%",
     width: "100vw",
   },
   inputContainer: {
+    flex: 1,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",

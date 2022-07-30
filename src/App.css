@@ -173,23 +173,6 @@
   }
 }
 
-.present-credits {
-  animation: scale-in-bottom 3s;
-}
-
-@keyframes scale-in-bottom {
-  0% {
-    transform: scale(0);
-    transform-origin: 50% 100%;
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    transform-origin: 50% 100%;
-    opacity: 1;
-  }
-}
-
 .loader {
   width: 120px;
   height: 120px;
@@ -204,5 +187,20 @@
   100% {
     transform: rotate(0) scale(1);
     opacity: 1;
+  }
+}
+
+.bouncing {
+  animation: bounce 0.75s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-30px);
   }
 }

@@ -11,12 +11,11 @@ import { CircleButton } from "../components/CircleButton";
 import { RiArrowGoBackFill } from "react-icons/ri";
 
 import planos from "../assets/images/planos.png";
-import sair from "../assets/images/sair.png";
 
 import { GiNotebook } from "react-icons/gi";
 import { GrContact } from "react-icons/gr";
 
-const Account = (props) => {
+const Account = () => {
   const [isPlans, setIsPlans] = useState(false);
   const [isAbout, setIsAbout] = useState(false);
   const [IsContact, setIsContact] = useState(false);
@@ -45,12 +44,6 @@ const Account = (props) => {
     setIsAbout(false);
   };
 
-  const handleSignOut = () => {
-    if (window.confirm("Deseja sair?")) {
-      props.signOut();
-    }
-  };
-
   return (
     <div style={styles.container}>
       {!isPlans && !IsContact && !isAbout && (
@@ -69,10 +62,6 @@ const Account = (props) => {
             <CircleButton onClick={handleSetIsAbout} text="Sobre">
               <GiNotebook style={styles.icon} />
             </CircleButton>
-
-            <CircleButton onClick={handleSignOut} text="Sair">
-              <Image src={sair} />
-            </CircleButton>
           </div>
         </>
       )}
@@ -80,7 +69,7 @@ const Account = (props) => {
       {IsContact && (
         <>
           <div style={styles.areaContainer}>
-            <Contact user={props.user} />
+            <Contact />
           </div>
         </>
       )}

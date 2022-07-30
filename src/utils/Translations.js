@@ -3,10 +3,17 @@ export const dictPTBR = {
     "Sign In": "Entrar",
     "Sign Up": "Inscrever-se",
     "Given Name": "Nome",
+    Code: "Código",
     Name: "Sobrenome",
     "We Emailed You": "Te enviamos um e-mail com o código de confirmação",
     "Confirm Sign In": "Confirmar Entrada",
     "Confirm Password": "Confirmar senha",
+    "Your code is on the way. To log in, enter the code we emailed to":
+      "Seu código está a caminho. Para entrar, digite o código que enviamos por e-mail",
+    "It may take a minute to arrive.": "Pode demorar um minuto para chegar",
+    "Your code is on the way. To log in, enter the code we texted to":
+      "Seu código está a caminho. Para entrar, digite o código que enviamos por SMS",
+    "Confirm Sign Up": "Confirmar Inscrição",
     "Your code is on the way.": "Seu código está vindo.",
     "Forgot your password?": "Esqueceu sua senha?",
     "Send code": "Enviar código",
@@ -29,6 +36,9 @@ export const dictPTBR = {
     "Your code is on the way. To log in, enter the code we sent you. It may take a minute to arrive.":
       "Seu código está sendo enviado. Para entrar, digite o código que enviamos para você. Pode demorar um minuto para chegar.",
     "Please fill out this field.": "Por favor, preencha este campo.",
-    "Fill out this field": "Preencha este campo",
+    "Fill out this field.": "Preencha este campo",
+    "Invalid phone number format.": "Formato de número de telefone inválido.",
+    "Please select an item in the list.":
+      "Por favor, selecione um item na lista.",
   },
 };

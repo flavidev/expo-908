@@ -3,19 +3,22 @@ import React, { useEffect, useState } from "react";
 import Timeline from "./Timeline";
 import Classes from "./Classes";
 import Account from "./Account";
+import UserProfile from "./UserProfile";
 
 import Header from "../components/Header";
 import BottomTabs from "../components/BottomTabs";
 
 import { checkUser } from "../utils/checkUser";
 
+export const UserContext = React.createContext();
+
 function Main(props) {
-  const [isTimeline, setIsTimeline] = useState(true);
-  const [isClasses, setIsClasses] = useState(false);
-  const [isAccount, setIsAccount] = useState(false);
+  const [mainState, setMainState] = useState("timeline");
+
   const [user, setUser] = useState({
     ...props.user.attributes,
     isAdmin: false,
+    creditPoints: 1,
   });
 
   useEffect(() => {
@@ -31,44 +34,45 @@ function Main(props) {
   }
 
   const handleSetIsTimeline = () => {
-    setIsClasses(false);
-    setIsAccount(false);
-    setIsTimeline(true);
+    setMainState("timeline");
   };
 
   const handleSetIsClasses = () => {
-    setIsTimeline(false);
-    setIsAccount(false);
-    setIsClasses(true);
+    setMainState("classes");
   };
 
   const handleSetIsAccount = () => {
-    setIsTimeline(false);
-    setIsClasses(false);
-    setIsAccount(true);
+    setMainState("account");
+  };
+
+  const handleSetIsProfile = () => {
+    setMainState("profile");
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.headerContainer}>
-        <Header user={user} />
-      </div>
+    <UserContext.Provider value={user}>
+      <div style={styles.container}>
+        <div style={styles.headerContainer}>
+          <Header setIsProfile={handleSetIsProfile} signOut={props.signOut} />
+        </div>
 
-      <div style={styles.bodyContainer}>
-        {isTimeline && <Timeline user={user} />}
-        {isClasses && <Classes user={user} />}
-        {isAccount && (
-          <Account user={user} setUser={setUser} signOut={props.signOut} />
-        )}
+        <div style={styles.bodyContainer}>
+          {mainState === "profile" && (
+            <UserProfile setIsTimeline={handleSetIsTimeline} />
+          )}
+          {mainState === "timeline" && <Timeline />}
+          {mainState === "classes" && <Classes />}
+          {mainState === "account" && <Account setUser={setUser} />}
+        </div>
+        <div style={styles.bottomContainer}>
+          <BottomTabs
+            setIsTimeline={handleSetIsTimeline}
+            setIsClasses={handleSetIsClasses}
+            setIsAccount={handleSetIsAccount}
+          />
+        </div>
       </div>
-      <div style={styles.bottomContainer}>
-        <BottomTabs
-          setIsTimeline={handleSetIsTimeline}
-          setIsClasses={handleSetIsClasses}
-          setIsAccount={handleSetIsAccount}
-        />
-      </div>
-    </div>
+    </UserContext.Provider>
   );
 }
 

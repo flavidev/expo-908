@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./Main";
+
 import { Image } from "@aws-amplify/ui-react";
 import whatsapp from "../assets/images/whatsapp.png";
 import email from "../assets/images/email.png";
 
-//import { IoLogoWhatsapp } from "react-icons/io";
-//import { MdEmail } from "react-icons/md";
-
 import { CircleButton } from "../components/CircleButton";
 
-function Contact(props) {
-  const user = props.user;
+function Contact() {
+  const user = useContext(UserContext);
 
   const handleOpenWhatsApp = () => {
     window.open(
