@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "./Main";
+
 import { createClass } from "../api/API";
 
 import { View, SliderField, Heading, SelectField } from "@aws-amplify/ui-react";
@@ -8,7 +10,8 @@ import { GiConfirmed } from "react-icons/gi";
 import { v4 } from "uuid";
 
 function AddClass(props) {
-  const userId = props.user.sub;
+  const user = useContext(UserContext);
+  const userId = user.sub;
 
   const refreshClasses = props.refreshClasses;
 

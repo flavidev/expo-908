@@ -1,9 +1,42 @@
 import axios from "axios";
 import { Storage } from "aws-amplify";
 
+import { Auth } from "aws-amplify";
+
 const api = axios.create({
   baseURL: "https://v2ph0dafi3.execute-api.sa-east-1.amazonaws.com/dev/eae/",
 });
+
+export const updateUserAttributes = async (props) => {
+  const { given_name, name, phone_number, birthdate, gender, address } = props;
+  const user = await Auth.currentAuthenticatedUser();
+  await Auth.updateUserAttributes(user, {
+    given_name,
+    name,
+    phone_number,
+    birthdate,
+    gender,
+    address,
+  });
+};
+export const getUserAttributes = async () => {
+  const user = await Auth.currentAuthenticatedUser();
+  return user.attributes;
+};
+
+export const checkAdmin = async () => {
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    const groups = user.signInUserSession.accessToken.payload["cognito:groups"];
+    if (groups) {
+      return groups.includes("Admin");
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // classes
 

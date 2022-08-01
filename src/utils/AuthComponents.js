@@ -42,6 +42,7 @@ export const formFields = {
     },
     birthdate: {
       isRequired: true,
+      mutable: true,
       label: "Nascimento",
       labelHidden: false,
       order: 5,

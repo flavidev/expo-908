@@ -5,19 +5,16 @@ import { UserContext } from "../pages/Main";
 
 import { ProfilePicture } from "./ProfilePicture";
 
-import { ImExit } from "react-icons/im";
 import { ImPencil2 } from "react-icons/im";
-import { HiOutlineEmojiHappy, HiOutlineEmojiSad } from "react-icons/hi";
+import {
+  HiOutlineEmojiHappy,
+  HiOutlineEmojiSad,
+  HiSpeakerphone,
+} from "react-icons/hi";
 
-function Header(props) {
-  const user = useContext(UserContext);
+function Header() {
+  const { user, setMainState } = useContext(UserContext);
   const { isAdmin } = user;
-
-  const handleSignOut = () => {
-    if (window.confirm("Deseja encerrar a sessão?")) {
-      props.signOut();
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -25,10 +22,18 @@ function Header(props) {
       <View style={styles.userInfoContainer}>
         <View
           style={styles.headerMenuOptions}
-          onClick={() => props.setIsProfile()}
+          onClick={() => setMainState("profile")}
         >
           <ImPencil2 style={styles.headerMenuIcon} />
           <Text style={styles.userInfoText}>Editar perfil</Text>
+        </View>
+        <Divider style={styles.divider} />
+        <View
+          style={styles.headerMenuOptions}
+          onClick={() => setMainState("contact")}
+        >
+          <HiSpeakerphone style={styles.headerMenuIcon} />
+          <Text style={styles.userInfoText}>Contato</Text>
         </View>
         <Divider style={styles.divider} />
         <View style={styles.headerMenuOptions}>
@@ -43,11 +48,6 @@ function Header(props) {
               : `Aula${user.creditPoints > 1 ? "s" : ""}
              semana${user.creditPoints > 1 ? "is" : "l"}: ${user.creditPoints}`}
           </Text>
-        </View>
-        <Divider style={styles.divider} />
-        <View style={styles.headerMenuOptions} onClick={handleSignOut}>
-          <ImExit style={styles.headerMenuIcon} />
-          <Text style={styles.userInfoText}>Sair</Text>
         </View>
       </View>
     </View>

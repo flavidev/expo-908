@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Post } from "../components/Post";
 
 const Timeline = () => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [posts, setPosts] = useState([]);
 

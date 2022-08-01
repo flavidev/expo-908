@@ -23,7 +23,7 @@ import cima from "../assets/images/cima.png";
 import dayOff from "../assets/images/folga.png";
 
 const Classes = (props) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const isAdmin = user.isAdmin;
   const userId = user.sub;
@@ -92,7 +92,9 @@ const Classes = (props) => {
                 style={{ maxHeight: "35vh" }}
                 className="bouncing"
               />
-              <Text style={styles.menuText}>Selecione o dia acima</Text>
+              <Text style={styles.menuText}>
+                Escolha um dia acima, {user.given_name}!
+              </Text>
             </View>
           )}
 

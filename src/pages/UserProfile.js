@@ -1,14 +1,11 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "./Main";
-//import { Auth } from "aws-amplify";
-
-import { validateBirthday, validatePhone } from "../utils/ValidateFields";
 
 import {
-  TextField,
-  SelectField,
   View,
   Text,
+  TextField,
+  SelectField,
   TextAreaField,
   ScrollView,
 } from "@aws-amplify/ui-react";
@@ -16,8 +13,10 @@ import {
 import { MdSend } from "react-icons/md";
 import { FaUndo } from "react-icons/fa";
 
-function UserProfile(props) {
-  const user = useContext(UserContext);
+import { updateUserAttributes } from "../api/API";
+
+function UserProfile() {
+  const { user, setUser, setMainState, loading } = useContext(UserContext);
 
   const [given_name, setGivenName] = useState(user.given_name);
   const [name, setName] = useState(user.name);
@@ -25,6 +24,43 @@ function UserProfile(props) {
   const [birthdate, setBirthdate] = useState(user.birthdate);
   const [gender, setGender] = useState(user.gender);
   const [address, setAddress] = useState(user.address);
+
+  const handleUpdateUser = async () => {
+    try {
+      loading(true);
+
+      setUser({
+        ...user,
+        given_name,
+        name,
+        phone_number,
+        birthdate,
+        gender,
+        address,
+      });
+      await updateUserAttributes({
+        given_name,
+        name,
+        phone_number,
+        birthdate,
+        gender,
+        address,
+      });
+
+      loading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDiscardChanges = () => {
+    loading(true);
+    setMainState("account");
+    setTimeout(() => {
+      setMainState("profile");
+      loading(false);
+    }, 500);
+  };
 
   return (
     <View style={styles.container}>
@@ -92,21 +128,18 @@ function UserProfile(props) {
       </ScrollView>
 
       <View style={styles.buttonsMenu}>
-        <FaUndo style={styles.button} onClick={() => props.setIsTimeline()} />
+        <FaUndo style={styles.button} onClick={handleDiscardChanges} />
         <MdSend
           style={styles.button}
           onClick={() => {
-            console.log(user),
-              alert(`
-            Nome: ${given_name}
-            Sobrenome: ${name}
-            WhatsApp: ${phone_number}
-            telefone é válido? ${validatePhone(phone_number)}
-            Nascimento: ${birthdate}
-            nascimento é válido? ${validateBirthday(birthdate)}
-            Gênero: ${gender}
-            Endereço: ${address}
-                `);
+            console.log(user);
+            if (
+              window.confirm(
+                "Deseja realmente atualizar os dados do seu perfil?"
+              )
+            ) {
+              handleUpdateUser();
+            }
           }}
         />
       </View>

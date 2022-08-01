@@ -1,103 +1,45 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { View, Image } from "@aws-amplify/ui-react";
 
-import { Image } from "@aws-amplify/ui-react";
-
-import Plans from "./Plans";
-import About from "./About";
-import Contact from "./Contact";
+import { UserContext } from "./Main";
 
 import { CircleButton } from "../components/CircleButton";
 
-import { RiArrowGoBackFill } from "react-icons/ri";
+import { GiThreeFriends } from "react-icons/gi";
 
-import planos from "../assets/images/planos.png";
+import sair from "../assets/images/sair.png";
+import carteirinha from "../assets/images/carteirinha.png";
+import logo from "../assets/images/eae-alt-logo.png";
 
-import { GiNotebook } from "react-icons/gi";
-import { GrContact } from "react-icons/gr";
+const Account = (props) => {
+  const { setMainState } = useContext(UserContext);
 
-const Account = () => {
-  const [isPlans, setIsPlans] = useState(false);
-  const [isAbout, setIsAbout] = useState(false);
-  const [IsContact, setIsContact] = useState(false);
-
-  const handleSetIsPlan = () => {
-    setIsPlans(true);
-    setIsContact(false);
-    setIsAbout(false);
-  };
-
-  const handleSetIsContact = () => {
-    setIsPlans(false);
-    setIsContact(true);
-    setIsAbout(false);
-  };
-
-  const handleSetIsAbout = () => {
-    setIsPlans(false);
-    setIsContact(false);
-    setIsAbout(true);
-  };
-
-  const handleGoBack = () => {
-    setIsPlans(false);
-    setIsContact(false);
-    setIsAbout(false);
+  const handleSignOut = () => {
+    if (window.confirm("Deseja encerrar a sessão?")) {
+      props.signOut();
+    }
   };
 
   return (
-    <div style={styles.container}>
-      {!isPlans && !IsContact && !isAbout && (
-        <>
-          <div style={styles.buttonsRow}>
-            <CircleButton onClick={handleSetIsPlan} text="Planos">
-              <Image src={planos} />
-            </CircleButton>
+    <View style={styles.container}>
+      <View style={styles.buttonsRow}>
+        <CircleButton onClick={() => setMainState("idCard")} text="Carteira">
+          <Image src={carteirinha} />
+        </CircleButton>
+        <CircleButton onClick={() => setMainState("about")} text="Sobre">
+          <Image src={logo} />
+        </CircleButton>
+      </View>
 
-            <CircleButton onClick={handleSetIsContact} text="Contato">
-              <GrContact style={styles.icon} />
-            </CircleButton>
-          </div>
-
-          <div style={styles.buttonsRow}>
-            <CircleButton onClick={handleSetIsAbout} text="Sobre">
-              <GiNotebook style={styles.icon} />
-            </CircleButton>
-          </div>
-        </>
-      )}
-
-      {IsContact && (
-        <>
-          <div style={styles.areaContainer}>
-            <Contact />
-          </div>
-        </>
-      )}
-
-      {isPlans && (
-        <>
-          <div style={styles.areaContainer}>
-            <Plans />
-          </div>
-        </>
-      )}
-
-      {isAbout && (
-        <>
-          <div style={styles.areaContainer}>
-            <About />
-          </div>
-        </>
-      )}
-
-      {(IsContact || isPlans || isAbout) && (
-        <RiArrowGoBackFill
-          style={styles.icon}
-          color="#fff"
-          onClick={handleGoBack}
-        />
-      )}
-    </div>
+      <View style={styles.buttonsRow}>
+        <CircleButton onClick={() => setMainState("partners")} text="Parcerias">
+          <GiThreeFriends style={styles.icon} />
+        </CircleButton>
+        <CircleButton onClick={handleSignOut} text="Sair">
+          <Image src={sair} />
+        </CircleButton>
+      </View>
+    </View>
   );
 };
 

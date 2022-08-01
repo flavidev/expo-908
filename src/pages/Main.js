@@ -4,16 +4,24 @@ import Timeline from "./Timeline";
 import Classes from "./Classes";
 import Account from "./Account";
 import UserProfile from "./UserProfile";
+import Contact from "./Contact";
+import About from "./About";
+import Partners from "./Partners";
+import IdCard from "./IdCard";
 
 import Header from "../components/Header";
 import BottomTabs from "../components/BottomTabs";
 
-import { checkUser } from "../utils/checkUser";
+import { Spinner } from "../components/Spinner";
+
+import { checkAdmin } from "../api/API";
 
 export const UserContext = React.createContext();
 
 function Main(props) {
   const [mainState, setMainState] = useState("timeline");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [user, setUser] = useState({
     ...props.user.attributes,
@@ -29,48 +37,46 @@ function Main(props) {
     if (user.isAdmin) {
       return;
     }
-    const isAdmin = await checkUser();
+    const isAdmin = await checkAdmin();
     setUser({ ...user, isAdmin });
   }
 
-  const handleSetIsTimeline = () => {
-    setMainState("timeline");
-  };
-
-  const handleSetIsClasses = () => {
-    setMainState("classes");
-  };
-
-  const handleSetIsAccount = () => {
-    setMainState("account");
-  };
-
-  const handleSetIsProfile = () => {
-    setMainState("profile");
+  const loading = (boolean) => {
+    boolean ? setIsLoading(true) : setIsLoading(false);
   };
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider
+      value={{ user, setUser, mainState, setMainState, loading }}
+    >
       <div style={styles.container}>
-        <div style={styles.headerContainer}>
-          <Header setIsProfile={handleSetIsProfile} signOut={props.signOut} />
-        </div>
+        {isLoading && <Spinner />}
 
-        <div style={styles.bodyContainer}>
-          {mainState === "profile" && (
-            <UserProfile setIsTimeline={handleSetIsTimeline} />
-          )}
-          {mainState === "timeline" && <Timeline />}
-          {mainState === "classes" && <Classes />}
-          {mainState === "account" && <Account setUser={setUser} />}
-        </div>
-        <div style={styles.bottomContainer}>
-          <BottomTabs
-            setIsTimeline={handleSetIsTimeline}
-            setIsClasses={handleSetIsClasses}
-            setIsAccount={handleSetIsAccount}
-          />
-        </div>
+        {!isLoading && (
+          <>
+            <div style={styles.headerContainer}>
+              <Header />
+            </div>
+
+            <div style={styles.bodyContainer}>
+              {mainState === "profile" && <UserProfile />}
+              {mainState === "timeline" && <Timeline />}
+              {mainState === "classes" && <Classes />}
+              {mainState === "account" && <Account signOut={props.signOut} />}
+              {mainState === "contact" && <Contact />}
+              {mainState === "about" && <About />}
+              {mainState === "partners" && <Partners />}
+              {mainState === "idCard" && <IdCard />}
+            </div>
+            <div style={styles.bottomContainer}>
+              <BottomTabs
+                setIsTimeline={() => setMainState("timeline")}
+                setIsClasses={() => setMainState("classes")}
+                setIsAccount={() => setMainState("account")}
+              />
+            </div>
+          </>
+        )}
       </div>
     </UserContext.Provider>
   );
